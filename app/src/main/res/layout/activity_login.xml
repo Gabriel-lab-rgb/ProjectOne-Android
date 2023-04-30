@@ -37,32 +37,67 @@ android:padding="@dimen/_24sdp"
             android:textColor="@color/material_dynamic_secondary10"
              />
 
-        <EditText
-            android:id="@+id/editUsernameOrEmail"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:paddingStart="@dimen/_16sdp"
-            android:paddingEnd="@dimen/_16sdp"
-            android:textColor="@color/black"
-            android:background="@drawable/background_input"
-            android:ems="10"
-            android:hint="@string/prompt_email"
-            android:inputType="textPersonName" />
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginTop="@dimen/_45sdp">
 
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            android:paddingStart="@dimen/_16sdp"
-            android:textColor="@color/black"
-            android:paddingEnd="@dimen/_16sdp"
-            android:background="@drawable/background_input"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:hint="@string/prompt_password"
-            />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usuario o Email"
+                android:textColor="@color/material_dynamic_secondary10"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toTopOf="@+id/editUsernameOrEmail"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editUsernameOrEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/background_input"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:paddingStart="@dimen/_16sdp"
+                android:paddingEnd="@dimen/_16sdp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    android:layout_marginTop="@dimen/_16sdp">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contraseña"
+        android:textColor="@color/material_dynamic_secondary10"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/background_input"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:paddingStart="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <Button
             android:id="@+id/button_login"
@@ -76,7 +111,7 @@ android:padding="@dimen/_24sdp"
 
 
         <TextView
-            android:id="@+id/textCrearCuenta"
+            android:id="@+id/textCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"

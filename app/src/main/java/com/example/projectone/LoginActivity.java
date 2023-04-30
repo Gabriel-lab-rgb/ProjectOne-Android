@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectone.Form.LoginResponse;
@@ -27,9 +28,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText editUsername;
     private EditText editPassword;
 
+    public TextView register;
+
     public static final String SHARED_PREFERENCES="shared_prefs";
     public static final String USERNAME_OR_EMAIL="user_key";
     public static final String PASSWORD="password_key";
+
+
 
     SharedPreferences sharedPreferences;
     String usernameEmail,password;
@@ -42,7 +47,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editUsername=this.findViewById(R.id.editUsernameOrEmail);
         editPassword=this.findViewById(R.id.editPassword);
         btn_login=this.findViewById(R.id.button_login);
+        register=this.findViewById(R.id.textCreate);
         btn_login.setOnClickListener(this);
+        register.setOnClickListener(this);
         sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         usernameEmail=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
         password=sharedPreferences.getString(PASSWORD,null);
@@ -67,6 +74,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }else{
                 login();
             }
+        }else if(v.getId() == R.id.textCreate){
+            startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
+            finish();
         }
     }
 

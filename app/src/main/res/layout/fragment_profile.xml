@@ -7,58 +7,57 @@
     tools:context=".ProfileFragment"
     android:orientation="vertical">
 
-<ScrollView
+    <include
+        android:id="@+id/toolbarUser"
+        layout="@layout/toolbar_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!-- TODO: Update blank fragment layout -->
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-       <include
-           layout="@layout/toolbar_user"
-           android:id="@+id/toolbarUser"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content" />
-
-       <androidx.constraintlayout.widget.ConstraintLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:padding="@dimen/_16sdp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_16sdp">
 
 
-           <com.google.android.material.imageview.ShapeableImageView
-               android:id="@+id/image_avatar"
-               android:layout_marginTop="@dimen/_16sdp"
-               android:layout_width="@dimen/_80sdp"
-               android:layout_height="@dimen/_80sdp"
-               android:background="@color/material_dynamic_primary10"
-               android:scaleType="centerCrop"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:riv_oval="true"
-               app:shapeAppearanceOverlay="@style/circleImageView" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/image_avatar"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@color/material_dynamic_primary10"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:riv_oval="true"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
 
 
+                <TextView
+                    android:id="@+id/textView_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gabriel Rivera Otero"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/image_avatar"
+                    app:layout_constraintStart_toStartOf="@+id/image_avatar"
+                    app:layout_constraintTop_toBottomOf="@+id/image_avatar" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-           <TextView
-               android:id="@+id/textView_name"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Gabriel Rivera Otero"
-               android:textSize="@dimen/_13ssp"
-               android:textStyle="bold"
-               app:layout_constraintEnd_toEndOf="@+id/image_avatar"
-               app:layout_constraintStart_toStartOf="@+id/image_avatar"
-               app:layout_constraintTop_toBottomOf="@+id/image_avatar" />
+        </LinearLayout>
 
 
-       </androidx.constraintlayout.widget.ConstraintLayout>
-
-   </LinearLayout>
 
      </ScrollView>
 

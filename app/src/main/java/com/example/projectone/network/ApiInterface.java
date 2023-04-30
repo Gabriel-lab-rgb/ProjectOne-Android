@@ -31,7 +31,7 @@ public interface ApiInterface {
    //Registro del usuario
     @FormUrlEncoded
     @POST("auth/signup")
-    Call<String> userRegister();
+    Call<String> userRegister(@FieldMap Map<String,String> params);
 
     //Perfil usuario
     @GET("user/{username}")
