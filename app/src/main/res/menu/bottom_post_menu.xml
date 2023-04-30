@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Imagen"
+        android:id="@+id/image"
+        android:icon="@drawable/baseline_image_24"/>
+    <item android:title="Camara"
+        android:id="@+id/camara"
+        android:icon="@drawable/baseline_camera_alt_24"/>
+    <item android:title="Gif"
+        android:id="@+id/gif"
+        android:icon="@drawable/baseline_gif_box_24"/>
+    <item android:title="video"
+        android:id="@+id/video"
+        android:icon="@drawable/baseline_rss_feed_24"/>
+
+</menu>
