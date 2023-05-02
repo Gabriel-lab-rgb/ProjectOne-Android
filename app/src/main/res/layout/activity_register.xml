@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario o Email"
-                android:textColor="@color/material_dynamic_secondary10"
+                android:textColor="@color/primary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/register_email"
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
-                android:textColor="@color/material_dynamic_secondary10"
+                android:textColor="@color/primary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/register_username"
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:text="Contraseña"
-                android:textColor="@color/material_dynamic_secondary10"
+                android:textColor="@color/primary_label"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toTopOf="@+id/register_password"
                 app:layout_constraintStart_toStartOf="@+id/register_password" />
@@ -135,7 +135,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:text="¿Ya tienes una cuenta? Inicias Sesión"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/material_dynamic_secondary10"
+            android:textColor="@color/primary_label"
             />
 
     </LinearLayout>

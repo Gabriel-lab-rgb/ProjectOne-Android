@@ -26,9 +26,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/background"
+        app:itemIconSize="@dimen/_18sdp"
+        app:itemIconTint="@color/bar_icon_tint"
+        app:itemTextColor="@color/bar_text_color"
+        >
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
 
     <TextView
         android:layout_width="wrap_content"

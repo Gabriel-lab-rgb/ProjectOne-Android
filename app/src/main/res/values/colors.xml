@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bar_indicator_color"></color>
+    <color name="bar_icon_tint">#CFD0E2</color>
+    <color name="bar_icon_tint_active">#67E0A3</color>
+    <color name="bar_text_color">#67E0A3</color>
+    <color name="background">#F8FCFD</color>
+    <color name="primary_label">#212121</color>
+    <color name="secondary_label">#757575</color>
+    <color name="input_background">#F3F6FB</color>
+    <color name="favorite_background">#FF7173</color>
+    <color name="buttom_color">#67E0A3</color>
+
 </resources>

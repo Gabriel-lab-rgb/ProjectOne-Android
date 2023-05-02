@@ -20,10 +20,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
+import com.google.android.material.resources.TextAppearance;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editEmail;
     private ImageView avatar;
     private Button btn_register;
+
+    private TextView login;
     public static final String SHARED_PREFERENCES="shared_prefs";
     public static final String USERNAME_OR_EMAIL="user_key";
     public static final String PASSWORD="password_key";
@@ -83,6 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editEmail=this.findViewById(R.id.register_email);
         avatar=this.findViewById(R.id.register_avatar);
         btn_register=this.findViewById(R.id.btn_register);
+        login=this.findViewById(R.id.textLogin);
 
         //SharedPreference
         sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
@@ -92,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         //Evento clickListener
         avatar.setOnClickListener(this);
         btn_register.setOnClickListener(this);
+        login.setOnClickListener(this);
 
     }
 
@@ -148,7 +154,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     .build());
 
         } else if (v.getId() == R.id.textLogin) {
-
             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         }

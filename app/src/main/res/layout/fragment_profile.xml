@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ProfileFragment"
     android:orientation="vertical">
 
@@ -48,6 +49,7 @@
                     android:text="Gabriel Rivera Otero"
                     android:textSize="@dimen/_13ssp"
                     android:textStyle="bold"
+                    android:textColor="@color/primary_label"
                     app:layout_constraintEnd_toEndOf="@+id/image_avatar"
                     app:layout_constraintStart_toStartOf="@+id/image_avatar"
                     app:layout_constraintTop_toBottomOf="@+id/image_avatar" />

@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    android:background="@color/white"
-android:padding="@dimen/_24sdp"
+    android:background="@color/background"
+    android:padding="@dimen/_24sdp"
     android:clipToPadding="false"
     android:scrollbars="none"
     tools:context=".LoginActivity">
@@ -25,7 +25,7 @@ android:padding="@dimen/_24sdp"
             android:text="Bienvenido"
             android:textSize="@dimen/_32ssp"
             android:textStyle="bold"
-            android:textColor="@color/material_dynamic_primary10" />
+            android:textColor="@color/primary_label" />
 
         <TextView
             android:id="@+id/text"
@@ -34,7 +34,7 @@ android:padding="@dimen/_24sdp"
             android:layout_marginTop="@dimen/_4sdp"
             android:text="Iniciar sesión"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/material_dynamic_secondary10"
+            android:textColor="@color/primary_label"
              />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,7 +47,7 @@ android:padding="@dimen/_24sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario o Email"
-                android:textColor="@color/material_dynamic_secondary10"
+                android:textColor="@color/primary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/editUsernameOrEmail"
@@ -71,7 +71,7 @@ android:padding="@dimen/_24sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contraseña"
-                android:textColor="@color/material_dynamic_secondary10"
+                android:textColor="@color/primary_label"
                 android:textSize="@dimen/_13ssp"
 
                 android:layout_marginBottom="@dimen/_8sdp"
@@ -114,7 +114,7 @@ android:padding="@dimen/_24sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:text="¿No tienes una cuenta? Registrarse"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/material_dynamic_secondary10"
+            android:textColor="@color/primary_label"
             />
 
     </LinearLayout>

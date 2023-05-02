@@ -12,5 +12,6 @@
         android:icon="@drawable/baseline_mark_unread_chat_alt_24"/>
     <item android:title="Perfil"
         android:id="@+id/profile"
+        
         android:icon="@drawable/baseline_person_24"/>
 </menu>
