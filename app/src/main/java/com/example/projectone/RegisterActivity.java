@@ -3,12 +3,18 @@ package com.example.projectone;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.FileUtils;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,9 +25,16 @@ import android.widget.Toast;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public static final String PASSWORD="password_key";
     SharedPreferences sharedPreferences;
     String usernameEmail,password;
+    Bitmap bitmap;
 
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
@@ -46,6 +60,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 if (uri != null) {
                     Log.d("PhotoPicker", "Selected URI: " + uri);
                     avatar.setImageURI(uri);
+
+                    try {
+                        bitmap= MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                        Log.d("c",bitmap.toString());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 } else {
                     Log.d("PhotoPicker", "No media selected");
                 }
@@ -74,23 +95,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private String convertirImgString(Bitmap bitmap){
+
+        ByteArrayOutputStream b=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,50,b);
+        byte[] imagenBytes=b.toByteArray();
+        String encodedImagen= Base64.getEncoder().encodeToString(imagenBytes);
+
+        return encodedImagen;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void register(){
 
 
-        Map<String,String> params = new HashMap<String, String>();
-        params.put("username",editUsername.getText().toString());
-        params.put("email",editEmail.getText().toString());
-        params.put("password",editPassword.getText().toString());
-        params.put("file","");
 
-
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).CreatePost(params);
+        Log.i("c",convertirImgString(bitmap)) ;
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).userRegister(editUsername.getText().toString(),editEmail.getText().toString(),editPassword.getText().toString(),convertirImgString(bitmap));
         create.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if(response.isSuccessful()){
                     Log.i("c","usuario insertado correctamente");
+                }else{
+                    Log.i("c", String.valueOf(response.code()));
                 }
             }
 
@@ -103,6 +133,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_register) {

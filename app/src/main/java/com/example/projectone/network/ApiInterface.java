@@ -29,9 +29,10 @@ public interface ApiInterface {
     Call<String> userLogin(@Field("usernameOrEmail") String username,@Field("password") String password);
 
    //Registro del usuario
+    @Headers("Content-Type: multipart/form-data;boundary=12345")
     @FormUrlEncoded
     @POST("auth/signup")
-    Call<String> userRegister(@FieldMap Map<String,String> params);
+    Call<String> userRegister(@Field("username") String username,@Field("email") String email,@Field("password") String password,@Field("file") String file);
 
     //Perfil usuario
     @GET("user/{username}")
