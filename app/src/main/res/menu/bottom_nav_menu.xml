@@ -3,15 +3,17 @@
 
     <item android:title="Comunidades"
         android:id="@+id/community"
-        android:icon="@drawable/baseline_dashboard_24"/>
+        android:icon="@drawable/outline_space_dashboard_24"/>
     <item android:title="Actividad"
         android:id="@+id/activity"
-        android:icon="@drawable/baseline_rss_feed_24"/>
+        android:icon="@drawable/outline_feed_24"/>
+    <item android:title="Add"
+        android:id="@+id/add"
+        android:icon="@drawable/outline_library_add_24"/>
     <item android:title="Mensajes"
         android:id="@+id/messages"
-        android:icon="@drawable/baseline_mark_unread_chat_alt_24"/>
+        android:icon="@drawable/outline_chat_bubble_outline_24"/>
     <item android:title="Perfil"
         android:id="@+id/profile"
-        
-        android:icon="@drawable/baseline_person_24"/>
+        android:icon="@drawable/outline_person_outline_24"/>
 </menu>

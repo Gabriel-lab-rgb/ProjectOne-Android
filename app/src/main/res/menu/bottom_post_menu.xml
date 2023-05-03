@@ -10,7 +10,6 @@
         android:id="@+id/gif"
         android:icon="@drawable/baseline_gif_box_24"/>
     <item android:title="video"
-        android:id="@+id/video"
-        android:icon="@drawable/baseline_rss_feed_24"/>
+        android:id="@+id/video" />
 
 </menu>
