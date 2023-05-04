@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
+import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,8 +31,13 @@ import retrofit2.Response;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
+
+    private ArrayList<Post> posts;
+    private RecyclerView recyclerView;
+    private PostAdapter postAdapter;
     private ImageView createPost;
 
+    private Usuario usuario;
     private BottomSheetDialog bottomSheetDialog;
     private View bottomSheetView;
 
@@ -46,6 +56,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.layout_bottom_sheet, view.findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottomSheetView);
+
+        recyclerView=view.findViewById(R.id.post_recycler);
 
         sharedPreferences=this.getActivity().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
@@ -74,13 +86,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
     public void getInfoUser(){
 
-        Call<Usuario> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUser(username);
+        Call<Usuario> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUser("Grangamer2018");
 
         UserCall.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
                     Log.i("c",String.valueOf(response.body()));
+                    postAdapter=new PostAdapter(response.body().getPosts(),getActivity().getApplicationContext());
+                    recyclerView.setAdapter(postAdapter);
+                    Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));
                 }else{
                     Log.i("c",String.valueOf(response));
                 }
