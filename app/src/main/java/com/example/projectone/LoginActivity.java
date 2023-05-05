@@ -82,12 +82,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void login(){
 
-       /* LoginResponse login=new LoginResponse();
-        login.setUsernameOrEmail(editUsername.getText().toString());
-        login.setPassword(editPassword.getText().toString());
-        Log.i("c",editUsername.getText().toString());
-        Log.i("c",editPassword.getText().toString());*/
-
         Call<String> loginResponseCall= ApiClient.getClientString().create(ApiInterface.class).userLogin(editUsername.getText().toString(),editPassword.getText().toString());
         loginResponseCall.enqueue(new Callback<String>() {
             @Override

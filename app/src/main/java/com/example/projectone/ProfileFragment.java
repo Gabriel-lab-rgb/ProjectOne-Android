@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener,PostAdapter.ItemClickListener {
 
 
     private ArrayList<Post> posts;
@@ -40,11 +42,17 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Usuario usuario;
     private BottomSheetDialog bottomSheetDialog;
     private View bottomSheetView;
-
+    private PostAdapter.ItemClickListener clickListener;
     SharedPreferences sharedPreferences;
     public static final String SHARED_PREFERENCES="shared_prefs";
     public static final String USERNAME_OR_EMAIL="user_key";
     String username;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,11 +62,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         createPost=view.findViewById(R.id.create);
         createPost.setOnClickListener(this);
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
-        bottomSheetView = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.layout_bottom_sheet, view.findViewById(R.id.bottomSheetContainer));
+        bottomSheetView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_bottom_sheet, view.findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottomSheetView);
 
         recyclerView=view.findViewById(R.id.post_recycler);
-
+        clickListener=this;
         sharedPreferences=this.getActivity().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
         username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
         getInfoUser();
@@ -93,7 +101,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
                     Log.i("c",String.valueOf(response.body()));
-                    postAdapter=new PostAdapter(response.body().getPosts(),getActivity().getApplicationContext());
+                    Log.i("c",String.valueOf(response.body().getPosts().get(0)));
+                    postAdapter=new PostAdapter(response.body().getPosts(),getActivity(),clickListener );
                     recyclerView.setAdapter(postAdapter);
                     Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));
                 }else{
@@ -107,4 +116,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             }
         });
     };
+
+    @Override
+    public void onItemClick(Post post) {
+
+        CommentsFragment home=CommentsFragment.newInstance(post.getId());
+       getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,home).addToBackStack(null).commit();
+
+    }
 }

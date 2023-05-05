@@ -1,5 +1,6 @@
 package com.example.projectone.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.projectone.CommentsFragment;
 import com.example.projectone.Entity.Gif;
 import com.example.projectone.Entity.Post;
+import com.example.projectone.HomeFragment;
 import com.example.projectone.R;
 
 import java.lang.reflect.Array;
@@ -22,10 +25,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private ArrayList<Post> posts;
     private Context context;
+    private ItemClickListener clickListener;
 
-    public PostAdapter(ArrayList<Post> posts, Context context) {
+    public PostAdapter(ArrayList<Post> posts, Context context,ItemClickListener clickListener) {
         this.posts = posts;
         this.context = context;
+        this.clickListener=clickListener;
     }
 
     @NonNull
@@ -42,6 +47,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.username.setText(posts.get(position).getUsuario().getUsername());
         holder.texto.setText(posts.get(position).getTexto());
         holder.fecha.setText(posts.get(position).getFecha().toString());
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onItemClick(posts.get(holder.getAdapterPosition()));
+
+            }
+        });
+        /*
+        holder.comentarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onItemClick(posts.get(holder.getAdapterPosition()));
+
+            }
+        });*/
+
+
     }
 
     @Override
@@ -49,11 +71,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         private ImageView image;
         private TextView username;
         private TextView fecha;
         private TextView texto;
+
+        private TextView like;
+
+        private TextView comentarios;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +88,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             username=itemView.findViewById(R.id.post_username);
             fecha=itemView.findViewById(R.id.post_date);
             texto=itemView.findViewById(R.id.post_text);
+            like=itemView.findViewById(R.id.post_like);
+            comentarios=itemView.findViewById(R.id.post_comentarios);
         }
+    }
+
+    public interface ItemClickListener{
+        public void onItemClick(Post post);
     }
 }

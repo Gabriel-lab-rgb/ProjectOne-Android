@@ -3,18 +3,14 @@ package com.example.projectone.Entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
-import java.util.List;
 
-public class Post {
+public class Comentario {
 
     @SerializedName("id")
     private long id;
 
     @SerializedName("usuario")
     private Usuario usuario;
-
-    @SerializedName("comunidad")
-    private Comunidad comunidad;
 
     @SerializedName("fecha")
     private Date fecha;
@@ -38,14 +34,6 @@ public class Post {
         this.usuario = usuario;
     }
 
-    public Comunidad getComunidad() {
-        return comunidad;
-    }
-
-    public void setComunidad(Comunidad comunidad) {
-        this.comunidad = comunidad;
-    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -60,17 +48,5 @@ public class Post {
 
     public void setTexto(String texto) {
         this.texto = texto;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", usuario=" + usuario +
-                ", comunidad=" + comunidad +
-                ", fecha=" + fecha +
-                ", texto='" + texto + '\'' +
-                '}';
     }
 }
