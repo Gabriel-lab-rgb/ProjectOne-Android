@@ -1,4 +1,4 @@
-package com.example.projectone;
+package com.example.projectone.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.projectone.R;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

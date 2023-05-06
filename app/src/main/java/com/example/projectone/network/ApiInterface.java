@@ -3,6 +3,7 @@ package com.example.projectone.network;
 import java.util.List;
 import java.util.Map;
 
+import com.example.projectone.Entity.Comentario;
 import com.example.projectone.Entity.Gif;
 import com.example.projectone.Entity.Usuario;
 import com.example.projectone.Form.LoginResponse;
@@ -49,7 +50,7 @@ public interface ApiInterface {
     Call<String> CreateComment();
 
     //Mostrar comentarios publicacion
-    @FormUrlEncoded
+
     @GET("post/comments/{id}")
-    Call<String> ShowCommentPost(@Path("id") long id);
+    Call<List<Comentario>> getCommentPost(@Path("id") long id);
 }

@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/comment_image_username"
+        android:layout_width="@dimen/_35sdp"
+
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/material_dynamic_primary10"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textMessage"
+        app:riv_oval="true"
+        app:shapeAppearanceOverlay="@style/circleImageView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:background="@drawable/background_received_message"
+        android:padding="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comment_image_username">
+
+        <TextView
+            android:id="@+id/comment_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Grangamer2018"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/comment_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ghfghfhgfjgdfgfgdfgdf"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toStartOf="@+id/comment_username"
+            app:layout_constraintTop_toBottomOf="@+id/comment_username"></TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

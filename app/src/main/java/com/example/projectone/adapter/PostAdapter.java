@@ -1,6 +1,5 @@
 package com.example.projectone.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.example.projectone.CommentsFragment;
-import com.example.projectone.Entity.Gif;
 import com.example.projectone.Entity.Post;
-import com.example.projectone.HomeFragment;
 import com.example.projectone.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -43,11 +37,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.ViewHolder holder, int position) {
 
-        Glide.with(context).load(posts.get(position).getUsuario().getImage()).into(holder.image);
+        /*Glide.with(context).load(posts.get(position).getUsuario().getImage()).into(holder.image);*/
         holder.username.setText(posts.get(position).getUsuario().getUsername());
         holder.texto.setText(posts.get(position).getTexto());
         holder.fecha.setText(posts.get(position).getFecha().toString());
-        holder.like.setOnClickListener(new View.OnClickListener() {
+        holder.comentarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickListener.onItemClick(posts.get(holder.getAdapterPosition()));

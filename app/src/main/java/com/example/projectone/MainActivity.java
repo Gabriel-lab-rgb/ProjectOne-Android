@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.example.projectone.Fragments.ActivityFragment;
+import com.example.projectone.Fragments.CreatePostFragment;
+import com.example.projectone.Fragments.HomeFragment;
+import com.example.projectone.Fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 

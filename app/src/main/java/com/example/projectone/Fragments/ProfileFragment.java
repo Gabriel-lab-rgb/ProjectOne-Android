@@ -1,4 +1,4 @@
-package com.example.projectone;
+package com.example.projectone.Fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,10 +18,10 @@ import android.widget.ImageView;
 
 import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
+import com.example.projectone.R;
 import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -115,7 +115,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
                 Log.i("c",t.getMessage());
             }
         });
-    };
+    }
 
     @Override
     public void onItemClick(Post post) {
