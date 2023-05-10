@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    android:background="@color/white"
-    android:padding="@dimen/_24sdp"
+    android:background="@color/background"
+    android:padding="@dimen/_20sdp"
     android:clipToPadding="false"
     android:scrollbars="none"
     tools:context=".RegisterActivity">
@@ -21,21 +21,23 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
+
             android:text="Sign Up"
+            android:layout_gravity="start"
             android:textSize="@dimen/_32ssp"
             android:textStyle="bold"
-            android:textColor="@color/material_dynamic_primary10" />
+            android:textColor="@color/primary_label" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/register_avatar"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:background="@color/material_dynamic_primary10"
+            android:background="@color/buttom_color"
             android:scaleType="centerCrop"
             app:riv_oval="true"
-            app:shapeAppearanceOverlay="@style/circleImageView" />
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            tools:srcCompat="@drawable/baseline_camera_alt_24" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -47,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario o Email"
-                android:textColor="@color/primary_label"
+                android:textColor="@color/secondary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/register_email"
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
-                android:textColor="@color/primary_label"
+                android:textColor="@color/secondary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/register_username"
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:text="Contraseña"
-                android:textColor="@color/primary_label"
+                android:textColor="@color/secondary_label"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintBottom_toTopOf="@+id/register_password"
                 app:layout_constraintStart_toStartOf="@+id/register_password" />

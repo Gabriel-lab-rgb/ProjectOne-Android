@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:overScrollMode="never"
     android:background="@color/background"
-    android:padding="@dimen/_24sdp"
+    android:padding="@dimen/_20sdp"
     android:clipToPadding="false"
     android:scrollbars="none"
     tools:context=".LoginActivity">
@@ -17,37 +17,30 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:text="Bienvenido"
-            android:textSize="@dimen/_32ssp"
-            android:textStyle="bold"
-            android:textColor="@color/primary_label" />
+
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:text="Iniciar sesión"
-            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:text="Login"
+            android:textSize="@dimen/_32ssp"
             android:textColor="@color/primary_label"
              />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_160sdp"
-            android:layout_marginTop="@dimen/_45sdp">
+            android:layout_marginTop="@dimen/_32sdp">
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Usuario o Email"
-                android:textColor="@color/primary_label"
+                android:textColor="@color/secondary_label"
                 android:textSize="@dimen/_13ssp"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/editUsernameOrEmail"
@@ -57,12 +50,12 @@
                 android:id="@+id/editUsernameOrEmail"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
                 android:background="@drawable/background_input"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingStart="@dimen/_16sdp"
                 android:paddingEnd="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/textView11" />
 
@@ -71,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contraseña"
-                android:textColor="@color/primary_label"
+                android:textColor="@color/secondary_label"
                 android:textSize="@dimen/_13ssp"
 
                 android:layout_marginBottom="@dimen/_8sdp"
@@ -84,6 +77,7 @@
                 android:layout_height="@dimen/_45sdp"
                 android:background="@drawable/background_input"
                 android:ems="10"
+
                 android:inputType="textPassword"
                 android:paddingStart="@dimen/_16sdp"
                 android:paddingEnd="@dimen/_16sdp"
