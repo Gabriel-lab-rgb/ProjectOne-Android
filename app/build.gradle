@@ -6,6 +6,17 @@ android {
     namespace 'com.example.projectone'
     compileSdk 33
 
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/profile',
+                            'src/main/res/layout/servicio',
+                            'src/main/res'
+                    ]
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.projectone"
         minSdk 25
