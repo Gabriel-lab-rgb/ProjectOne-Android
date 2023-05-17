@@ -101,21 +101,37 @@
                 android:id="@+id/menuOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:paddingTop="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/option1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Opción 1" />
+                    android:padding="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@drawable/null_radio_button"
+                    android:textColor="@drawable/radio_text_selector"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:text="Publicaciones" />
 
+                <!--
                 <RadioButton
                     android:id="@+id/option2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Opción 2" />
-
-                <!-- Agrega más RadioButtons según tus necesidades -->
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:padding="@dimen/_6sdp"
+                    android:background="@drawable/radio_selector"
+                    android:button="@drawable/null_radio_button"
+                    android:textColor="@drawable/radio_text_selector"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:text="Historias" />
+                -->
 
             </RadioGroup>
 
