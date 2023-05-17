@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.projectone.Fragments.ActivityFragment;
+import com.example.projectone.Fragments.ChatsFragment;
 import com.example.projectone.Fragments.CreatePostFragment;
 import com.example.projectone.Fragments.HomeFragment;
 import com.example.projectone.Fragments.ProfileFragment;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,createPost).addToBackStack(null).commit();
                 break;
             case R.id.messages:
+                ChatsFragment chatsFragment=new ChatsFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatsFragment).addToBackStack(null).commit();
                 break;
 
         }

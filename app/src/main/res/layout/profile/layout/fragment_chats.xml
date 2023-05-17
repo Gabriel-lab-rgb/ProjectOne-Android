@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.SeachFragment">
+    tools:context=".Fragments.ChatsFragment">
 
 
     <include
-        layout="@layout/toolbar_seach"
-        android:id="@+id/toolbar_seach"
+        android:id="@+id/include4"
+        layout="@layout/toolbar_chats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -19,22 +19,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_seach">
+        app:layout_constraintTop_toBottomOf="@+id/include4">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="@dimen/_12sdp"
-            android:id="@+id/user_recycler"
+            android:id="@+id/chats_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="false">
 
         </androidx.recyclerview.widget.RecyclerView>
-
-
     </ScrollView>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

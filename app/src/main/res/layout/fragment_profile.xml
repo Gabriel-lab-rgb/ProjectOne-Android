@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,29 +7,42 @@
     tools:context=".Fragments.ProfileFragment"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/include">
 
 
-    <!-- TODO: Update blank fragment layout -->
+
+        <!-- TODO: Update blank fragment layout -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_16sdp">
+                android:padding="@dimen/_12sdp">
 
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/image_avatar"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
                     android:background="@color/material_dynamic_primary10"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:riv_oval="true"
                     app:shapeAppearanceOverlay="@style/circleImageView" />
 
@@ -38,21 +51,80 @@
                     android:id="@+id/textView_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:text="Gabriel Rivera Otero"
-                    android:textSize="@dimen/_13ssp"
-                    android:textStyle="bold"
                     android:textColor="@color/primary_label"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/image_avatar"
                     app:layout_constraintStart_toStartOf="@+id/image_avatar"
                     app:layout_constraintTop_toBottomOf="@+id/image_avatar" />
 
+                <TextView
+                    android:id="@+id/user_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:textSize="@dimen/_13ssp"
+                    android:text="dsdskldjklsdklsjdklsdklsdklsjkldskldnknkndklfndklfndsklnflkddkfndklnfkldnfklfdkfndklfndlkkddklnfdkl"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_name" />
+
+                <Button
+                    android:id="@+id/primerBoton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="seguir"
+                    app:layout_constraintEnd_toStartOf="@id/segundoBoton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/user_description"
+                    app:layout_constraintHorizontal_bias="0.25"/>
+
+                <Button
+                    android:id="@+id/segundoBoton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="enviar mensaje"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/primerBoton"
+                    app:layout_constraintTop_toBottomOf="@+id/user_description"
+                    app:layout_constraintHorizontal_bias="0.75"/>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RadioGroup
+                android:id="@+id/menuOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/option1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opción 1" />
+
+                <RadioButton
+                    android:id="@+id/option2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opción 2" />
+
+                <!-- Agrega más RadioButtons según tus necesidades -->
+
+            </RadioGroup>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/post_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:reverseLayout="false">
 
@@ -60,4 +132,8 @@
 
         </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

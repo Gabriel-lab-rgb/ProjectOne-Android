@@ -7,50 +7,58 @@
     android:layout_height="@dimen/_48sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/c1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageBack"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
             android:padding="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_arrow_back_ios_24">
+            app:srcCompat="@drawable/baseline_arrow_back_ios_24"
+            android:layout_marginTop="@dimen/_12sdp"></androidx.appcompat.widget.AppCompatImageView>
 
-        </androidx.appcompat.widget.AppCompatImageView>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageInfo"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            android:layout_marginRight="@dimen/_16sdp"
+            android:padding="@dimen/_5sdp"
+            app:srcCompat="@drawable/baseline_more_horiz_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
 
         <TextView
-            android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_8sdp"
             android:ellipsize="end"
             android:gravity="center"
-            android:text="Crear Publicación"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
-            android:textColor="@color/primary_label"
+            android:text="Nombre"
             app:layout_constraintBottom_toBottomOf="@+id/imageBack"
+            app:layout_constraintEnd_toStartOf="@id/imageInfo"
+            app:layout_constraintTop_toTopOf="@id/imageBack"
             app:layout_constraintStart_toEndOf="@id/imageBack"
-            app:layout_constraintTop_toTopOf="@id/imageBack"></TextView>
+            ></TextView>
 
-        <Button
-            android:id="@+id/button_publicar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
-            android:text="Publicar"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </Toolbar>

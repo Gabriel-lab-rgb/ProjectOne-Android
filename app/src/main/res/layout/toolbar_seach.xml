@@ -4,31 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/background"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/_48sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp"
-        tools:ignore="MissingConstraints">
+        android:padding="@dimen/_6sdp">
 
-
-        <EditText
-            android:id="@+id/editTextTextPersonName2"
+        <SearchView
+            android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
 
+            android:background="@drawable/background_input"
+            android:iconifiedByDefault="false"
+            android:queryHint="Buscar..."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-             />
-
-
-
-
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
