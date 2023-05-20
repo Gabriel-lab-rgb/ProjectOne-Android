@@ -8,15 +8,24 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="bar_indicator_color"></color>
-    <color name="bar_icon_tint">#CFD0E2</color>
-    <color name="bar_icon_tint_active">#67E0A3</color>
-    <color name="bar_text_color">#67E0A3</color>
-    <color name="background">#0e172c</color>
-    <color name="primary_label">#FFFFFFFF</color>
-    <color name="secondary_label">#757683  </color>
-    <color name="input_background">#2d3851 </color>
-    <color name="favorite_background">#FF7173</color>
-    <color name="buttom_color">#6566ea</color>
+
+<color name="resaltado"> #FF4081 </color>
+    <color name="background_light">#FFFFFF</color> <!-- Color para el modo claro -->
+    <color name="background_dark">#212121</color>
+
+    <color name="primary_label_light">#212121</color>
+    <color name="primary_label_dark">#FFFFFF</color>
+
+    <color name="secondary_label_light">#757575</color>
+    <color name="secondary_label_dark">#CCCCCC</color>
+
+    <color name="input_background">#f1f1f1</color>
+
+
+    <color name="primary">#4c35e0</color>
+    <color name="secondary">#64B5F6</color>
+    <color name="icono_activo">#2196F3</color>
+    <color name="icono_inactivo">#9E9E9E</color>
+    <color name="separador">#BDBDBD</color>
 
 </resources>

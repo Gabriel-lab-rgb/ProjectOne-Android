@@ -11,8 +11,32 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+
     </style>
+
+    <!-- Modo claro -->
+    <style name="BACKGROUND">
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+    <style name="PRIMARY_LABEL">
+        <item name="android:textColor">#212121</item>
+    </style>
+
+    <style name="SECONDARY_LABEL">
+        <item name="android:textColor">#908e9f</item>
+    </style>
+
+    <style name="INPUT_TEXT">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="INPUT_BACKGROUND">
+        <item name="android:background">#f1f1f1</item>
+    </style>
+
+
+
     <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheetDialogTheme</item>
     </style>

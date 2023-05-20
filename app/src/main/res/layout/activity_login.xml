@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    android:background="@color/background"
+    style="@style/BACKGROUND"
     android:padding="@dimen/_20sdp"
     android:clipToPadding="false"
     android:scrollbars="none"
@@ -27,8 +27,17 @@
             android:layout_gravity="start"
             android:text="Login"
             android:textSize="@dimen/_32ssp"
-            android:textColor="@color/primary_label"
+            android:textColor="@color/primary"
              />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SECONDARY_LABEL"
+            android:textSize="@dimen/_16ssp"
+            android:text="¡Bienvenido de nuevo! Inicia sesión para comenzar tu experiencia." />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,9 +48,10 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Usuario o Email"
-                android:textColor="@color/secondary_label"
-                android:textSize="@dimen/_13ssp"
+                android:text="USUARIO O EMAIL"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/editUsernameOrEmail"
                 app:layout_constraintStart_toStartOf="@+id/editUsernameOrEmail" />
@@ -53,19 +63,23 @@
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:background="@drawable/background_input"
                 android:ems="10"
+                android:drawableLeft="@drawable/baseline_person_24"
+
                 android:inputType="textPersonName"
-                android:paddingStart="@dimen/_16sdp"
-                android:paddingEnd="@dimen/_16sdp"
+                android:paddingStart="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_6sdp"
                 android:textColor="@color/black"
+                android:hint="Tu nombre de usuario o email"
                 app:layout_constraintBottom_toTopOf="@+id/textView11" />
 
             <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contraseña"
-                android:textColor="@color/secondary_label"
-                android:textSize="@dimen/_13ssp"
+                android:text="CONTRASEÑA"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_10ssp"
 
                 android:layout_marginBottom="@dimen/_8sdp"
                 app:layout_constraintBottom_toTopOf="@+id/editPassword"
@@ -77,11 +91,12 @@
                 android:layout_height="@dimen/_45sdp"
                 android:background="@drawable/background_input"
                 android:ems="10"
-
+                android:drawableLeft="@drawable/baseline_password_24"
                 android:inputType="textPassword"
-                android:paddingStart="@dimen/_16sdp"
-                android:paddingEnd="@dimen/_16sdp"
+                android:paddingStart="@dimen/_6sdp"
+                android:paddingEnd="@dimen/_6sdp"
                 android:textColor="@color/black"
+                android:hint="Tu contraseña"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
 
@@ -108,7 +123,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:text="¿No tienes una cuenta? Registrarse"
             android:textSize="@dimen/_12ssp"
-            android:textColor="@color/primary_label"
+            style="@style/PRIMARY_LABEL"
             />
 
     </LinearLayout>
