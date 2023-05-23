@@ -3,64 +3,108 @@ package com.example.projectone.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.SearchView;
 
+import com.example.projectone.Entity.Post;
+import com.example.projectone.Entity.Usuario;
+import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.R;
+import com.example.projectone.adapter.PostAdapter;
+import com.example.projectone.adapter.UserAdapter;
+import com.example.projectone.network.ApiClient;
+import com.example.projectone.network.ApiInterface;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SeachFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SeachFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public SeachFragment() {
-        // Required empty public constructor
-    }
+public class SeachFragment extends Fragment implements PostAdapter.ItemClickListener{
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SeachFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SeachFragment newInstance(String param1, String param2) {
-        SeachFragment fragment = new SeachFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+private SearchView searchView;
+private EditText search;
+    private RecyclerView recyclerView;
+    private UserAdapter userAdapter;
+    private PostAdapter.ItemClickListener clickListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view= inflater.inflate(R.layout.fragment_seach, container, false);
+        /*searchView=view.findViewById(R.id.searchView);*/
+        search = view.findViewById(R.id.search);
+        recyclerView=view.findViewById(R.id.user_recycler);
+        /*search = searchView.findViewById(androidx.appcompat.R.id.search_src_text);*/
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Método invocado antes de que el texto cambie en el SearchView
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                obtenerUsuarios(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_seach, container, false);
+        return view;
     }
-}
+
+
+    @Override
+    public void onItemClick(Post post) {
+
+    }
+
+    @Override
+    public void onUserClick(UsuarioSummary.user usuario) {
+
+        ProfileFragment profile=ProfileFragment.newInstance(usuario.getUsername());
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
+    }
+
+
+    public void obtenerUsuarios(String cadena){
+
+        Call<UsuarioSummary> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUserStartingWith(cadena);
+
+        UserCall.enqueue(new Callback<UsuarioSummary>() {
+            @Override
+            public void onResponse(Call<UsuarioSummary> call, Response<UsuarioSummary> response) {
+                if(response.isSuccessful()){
+                    Log.i("c",response.body().toString());
+                    userAdapter=new UserAdapter((ArrayList<UsuarioSummary.user>) response.body().getUsuarios(),getActivity(),clickListener);
+                    recyclerView.setAdapter(userAdapter);
+
+                }else{
+                    Log.i("c",String.valueOf(response));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioSummary> call, Throwable t) {
+                Log.i("c",t.getMessage());
+            }
+        });
+    }
+
+    }

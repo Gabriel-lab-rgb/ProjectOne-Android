@@ -87,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editEmail=this.findViewById(R.id.register_email);
         avatar=this.findViewById(R.id.register_avatar);
         btn_register=this.findViewById(R.id.btn_register);
-        login=this.findViewById(R.id.textLogin);
+        /*login=this.findViewById(R.id.textLogin);*/
 
         //SharedPreference
         sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
@@ -153,9 +153,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                     .build());
 
-        } else if (v.getId() == R.id.textLogin) {
+        } /*else if (v.getId() == R.id.textLogin) {
             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
-        }
+        }*/
     }
 }

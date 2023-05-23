@@ -6,6 +6,7 @@ import java.util.Map;
 import com.example.projectone.Entity.Comentario;
 import com.example.projectone.Entity.Gif;
 import com.example.projectone.Entity.Usuario;
+import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.Form.LoginResponse;
 import com.google.gson.annotations.SerializedName;
 
@@ -34,6 +35,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("auth/signup")
     Call<String> userRegister(@Field("username") String username,@Field("email") String email,@Field("password") String password,@Field("file") String file);
+
+    @GET("/user/search")
+    Call<UsuarioSummary> getUserStartingWith(@Query("cadena") String cadena);
+
 
     //Perfil usuario
     @GET("user/{username}")

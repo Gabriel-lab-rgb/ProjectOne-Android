@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
+import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.R;
 import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.network.ApiClient;
@@ -47,6 +48,29 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     public static final String SHARED_PREFERENCES="shared_prefs";
     public static final String USERNAME_OR_EMAIL="user_key";
     String username;
+
+
+    private static final String ARG_PARAM1 = "param1";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+
+
+    public static ProfileFragment newInstance(String param1) {
+        ProfileFragment fragment = new ProfileFragment ();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 =getArguments().getString(ARG_PARAM1);
+        }
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -123,5 +147,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
         CommentsFragment home=CommentsFragment.newInstance(post.getId());
        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,home).addToBackStack(null).commit();
 
+    }
+
+    @Override
+    public void onUserClick(UsuarioSummary.user usuario) {
+
+        ProfileFragment profile=ProfileFragment.newInstance(usuario.getUsername());
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
     }
 }

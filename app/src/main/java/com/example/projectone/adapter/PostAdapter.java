@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.projectone.Entity.Post;
+import com.example.projectone.Entity.Usuario;
+import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.R;
 
 import java.util.ArrayList;
@@ -89,5 +91,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public interface ItemClickListener{
         public void onItemClick(Post post);
+
+        public void onUserClick(UsuarioSummary.user user);
     }
 }

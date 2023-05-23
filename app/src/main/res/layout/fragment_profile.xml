@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="Gabriel Rivera Otero"
-                    android:textColor="@color/primary_label"
+
                     android:textSize="@dimen/_18ssp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/image_avatar"

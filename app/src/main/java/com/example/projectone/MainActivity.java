@@ -12,6 +12,7 @@ import com.example.projectone.Fragments.ChatsFragment;
 import com.example.projectone.Fragments.CreatePostFragment;
 import com.example.projectone.Fragments.HomeFragment;
 import com.example.projectone.Fragments.ProfileFragment;
+import com.example.projectone.Fragments.SeachFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,home).addToBackStack(null).commit();
                 break;
             case R.id.activity:
-                ActivityFragment activity=new ActivityFragment();
+                SeachFragment activity=new SeachFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,activity).addToBackStack(null).commit();
                 break;
             case R.id.profile:
