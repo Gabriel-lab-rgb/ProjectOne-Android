@@ -21,12 +21,12 @@ import java.util.ArrayList;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
 
-    private ArrayList<UsuarioSummary.user> usuarios;
+    private ArrayList<UsuarioSummary> usuarios;
     private Context context;
     private PostAdapter.ItemClickListener clickListener;
 
 
-    public UserAdapter(ArrayList<UsuarioSummary.user> usuarios, Context context, PostAdapter.ItemClickListener clickListener) {
+    public UserAdapter(ArrayList<UsuarioSummary> usuarios, Context context, PostAdapter.ItemClickListener clickListener) {
         this.usuarios = usuarios;
         this.context = context;
         this.clickListener = clickListener;
@@ -44,7 +44,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         /*Glide.with(context).load(posts.get(position).getImage()).into(holder.image);*/
         holder.username.setText(usuarios.get(position).getUsername());
-        holder.email.setText(usuarios.get(position).getEmail());
+        /*holder.email.setText(usuarios.get(position).getEmail());*/
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return usuarios.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -72,7 +72,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             constraintLayout=itemView.findViewById(R.id.item_u);
-            image=itemView.findViewById(R.id.seach_email);
+            image=itemView.findViewById(R.id.seach_image);
             username=itemView.findViewById(R.id.seach_username);
             email=itemView.findViewById(R.id.seach_email);
 

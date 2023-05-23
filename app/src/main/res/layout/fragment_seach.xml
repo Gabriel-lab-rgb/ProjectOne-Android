@@ -20,7 +20,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_seach" />
+         />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,13 +28,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_seach">
+        app:layout_constraintTop_toBottomOf="@+id/search">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:padding="@dimen/_12sdp"
             android:id="@+id/user_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_12sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="false">
 

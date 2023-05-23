@@ -92,6 +92,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public interface ItemClickListener{
         public void onItemClick(Post post);
 
-        public void onUserClick(UsuarioSummary.user user);
+        public void onUserClick(UsuarioSummary user);
     }
 }

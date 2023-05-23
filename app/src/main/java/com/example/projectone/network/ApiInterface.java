@@ -37,7 +37,7 @@ public interface ApiInterface {
     Call<String> userRegister(@Field("username") String username,@Field("email") String email,@Field("password") String password,@Field("file") String file);
 
     @GET("/user/search")
-    Call<UsuarioSummary> getUserStartingWith(@Query("cadena") String cadena);
+    Call<List<UsuarioSummary>> getUserStartingWith(@Query("cadena") String cadena);
 
 
     //Perfil usuario

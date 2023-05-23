@@ -24,6 +24,7 @@ import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +46,7 @@ private EditText search;
         View view= inflater.inflate(R.layout.fragment_seach, container, false);
         /*searchView=view.findViewById(R.id.searchView);*/
         search = view.findViewById(R.id.search);
+        clickListener=this;
         recyclerView=view.findViewById(R.id.user_recycler);
         /*search = searchView.findViewById(androidx.appcompat.R.id.search_src_text);*/
         search.addTextChangedListener(new TextWatcher() {
@@ -55,17 +57,16 @@ private EditText search;
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                obtenerUsuarios(s.toString());
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                obtenerUsuarios(s.toString());
             }
 
         });
 
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -76,7 +77,7 @@ private EditText search;
     }
 
     @Override
-    public void onUserClick(UsuarioSummary.user usuario) {
+    public void onUserClick(UsuarioSummary usuario) {
 
         ProfileFragment profile=ProfileFragment.newInstance(usuario.getUsername());
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
@@ -85,14 +86,14 @@ private EditText search;
 
     public void obtenerUsuarios(String cadena){
 
-        Call<UsuarioSummary> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUserStartingWith(cadena);
+        Call<List<UsuarioSummary>> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUserStartingWith(cadena);
 
-        UserCall.enqueue(new Callback<UsuarioSummary>() {
+        UserCall.enqueue(new Callback<List<UsuarioSummary>>() {
             @Override
-            public void onResponse(Call<UsuarioSummary> call, Response<UsuarioSummary> response) {
+            public void onResponse(Call<List<UsuarioSummary>> call, Response<List<UsuarioSummary>> response) {
                 if(response.isSuccessful()){
-                    Log.i("c",response.body().toString());
-                    userAdapter=new UserAdapter((ArrayList<UsuarioSummary.user>) response.body().getUsuarios(),getActivity(),clickListener);
+                    Log.i("c 94",response.body().toString());
+                    userAdapter=new UserAdapter((ArrayList<UsuarioSummary>) response.body(),getActivity(),clickListener);
                     recyclerView.setAdapter(userAdapter);
 
                 }else{
@@ -101,7 +102,7 @@ private EditText search;
             }
 
             @Override
-            public void onFailure(Call<UsuarioSummary> call, Throwable t) {
+            public void onFailure(Call<List<UsuarioSummary>> call, Throwable t) {
                 Log.i("c",t.getMessage());
             }
         });

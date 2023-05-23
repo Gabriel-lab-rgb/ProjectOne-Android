@@ -2,18 +2,11 @@ package com.example.projectone.Entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioSummary {
 
-
-    private List<user> usuarios;
-
-    public List<user> getUsuarios() {
-        return usuarios;
-    }
-
-    public class user{
         @SerializedName("id")
         private long id;
         @SerializedName("email")
@@ -23,8 +16,8 @@ public class UsuarioSummary {
         @SerializedName("image")
         private String image;
 
-        public long getId() {
-            return id;
+       public long getId() {
+          return id;
         }
 
         public String getEmail() {
@@ -39,4 +32,4 @@ public class UsuarioSummary {
             return image;
         }
     }
-}
+

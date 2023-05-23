@@ -150,7 +150,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     }
 
     @Override
-    public void onUserClick(UsuarioSummary.user usuario) {
+    public void onUserClick(UsuarioSummary usuario) {
 
         ProfileFragment profile=ProfileFragment.newInstance(usuario.getUsername());
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
