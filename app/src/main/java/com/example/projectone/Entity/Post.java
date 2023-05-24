@@ -2,8 +2,10 @@ package com.example.projectone.Entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class Post {
 
@@ -21,6 +23,23 @@ public class Post {
 
     @SerializedName("texto")
     private String texto;
+
+    private ArrayList<LikePost> likePosts;
+
+    private ArrayList<Comentario> comentarios;
+
+
+    public ArrayList<LikePost> getLikePosts() {
+        return likePosts;
+    }
+
+    public int getCountLikes() {
+        return likePosts.size();
+    }
+
+    public int getComentarios() {
+        return comentarios.size();
+    }
 
     public long getId() {
         return id;
@@ -73,4 +92,6 @@ public class Post {
                 ", texto='" + texto + '\'' +
                 '}';
     }
+
+
 }

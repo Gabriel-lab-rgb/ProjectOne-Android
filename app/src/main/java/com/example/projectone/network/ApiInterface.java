@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -48,6 +49,15 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("post/create")
     Call<String> CreatePost(@FieldMap Map<String,String> params);
+
+
+    @FormUrlEncoded
+    @POST("post/addLike")
+    Call<String> addLike(@Field("post_id") long id,@Field("username") String username);
+
+    @FormUrlEncoded
+    @DELETE("post/deleteLike")
+    Call<String> deleteLike(@Field("post_id") long id,@Field("username") String username);
 
     //Crear Comentario
     @FormUrlEncoded

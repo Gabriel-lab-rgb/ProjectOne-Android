@@ -3,6 +3,7 @@ package com.example.projectone.Entity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Set;
 
 public class Usuario {
@@ -17,6 +18,17 @@ public class Usuario {
     private String image;
     @SerializedName("posts")
     private ArrayList<Post> posts;
+
+    @SerializedName("likePost")
+    private ArrayList<LikePost> likes;
+
+    public ArrayList<LikePost> getLikes() {
+        return likes;
+    }
+
+    public Usuario(String username) {
+        this.username = username;
+    }
 
     public long getId() {
         return id;
@@ -67,5 +79,18 @@ public class Usuario {
                 ", image='" + image + '\'' +
                 ", posts=" + posts +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return username.equals(usuario.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

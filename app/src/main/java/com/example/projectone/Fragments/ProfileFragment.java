@@ -126,7 +126,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
                 if(response.isSuccessful()){
                     Log.i("c",String.valueOf(response.body()));
                     Log.i("c",String.valueOf(response.body().getPosts().get(0)));
-                    postAdapter=new PostAdapter(response.body().getPosts(),getActivity(),clickListener );
+                    postAdapter=new PostAdapter(response.body().getPosts(),username,getActivity(),clickListener );
                     recyclerView.setAdapter(postAdapter);
                     Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));
                 }else{

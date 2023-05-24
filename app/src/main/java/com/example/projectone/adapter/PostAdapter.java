@@ -1,21 +1,30 @@
 package com.example.projectone.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.projectone.Entity.LikePost;
 import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
 import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.R;
+import com.example.projectone.network.ApiClient;
+import com.example.projectone.network.ApiInterface;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -23,8 +32,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private Context context;
     private ItemClickListener clickListener;
 
-    public PostAdapter(ArrayList<Post> posts, Context context,ItemClickListener clickListener) {
+    private String username="Grangamer2018";
+
+    public PostAdapter(ArrayList<Post> posts,String username, Context context,ItemClickListener clickListener) {
         this.posts = posts;
+        this.username ="Grangamer2018";
         this.context = context;
         this.clickListener=clickListener;
     }
@@ -43,6 +55,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.username.setText(posts.get(position).getUsuario().getUsername());
         holder.texto.setText(posts.get(position).getTexto());
         holder.fecha.setText(posts.get(position).getFecha().toString());
+       /* holder.like.setText(posts.get(position).getCountLikes());
+        holder.comentarios.setText(posts.get(position).getComentarios());*/
         holder.comentarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,14 +64,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
-        /*
-        holder.comentarios.setOnClickListener(new View.OnClickListener() {
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clickListener.onItemClick(posts.get(holder.getAdapterPosition()));
+                Log.i("c","hola");
 
+                Post post=posts.get(holder.getAdapterPosition());
+                LikePost likePost=new LikePost(new Usuario(username));
+                if(post.getLikePosts().contains(likePost)){
+
+                    post.getLikePosts().remove(likePost);
+                    deleteLike(post.getId());
+                }else{
+                    post.getLikePosts().add(likePost);
+                    addLike(post.getId());
+                }
+
+                notifyItemChanged(holder.getAdapterPosition());
             }
-        });*/
+
+
+        });
 
 
     }
@@ -94,4 +122,43 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         public void onUserClick(UsuarioSummary user);
     }
+
+    public void addLike(long id){
+
+        Log.i("c",username);
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).addLike(id,username);
+        create.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if(response.isSuccessful()){
+                    Log.i("c","like insertado correctamente");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("c",t.getMessage());
+            }
+        });
+    }
+
+    public void deleteLike(long id){
+
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).deleteLike(id,username);
+        create.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+                if(response.isSuccessful()){
+                    Log.i("c","like eliminado correctamente");
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.i("c",t.getMessage());
+            }
+        });
+    }
+
+
 }
