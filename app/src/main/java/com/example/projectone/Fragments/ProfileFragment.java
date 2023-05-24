@@ -44,10 +44,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     private BottomSheetDialog bottomSheetDialog;
     private View bottomSheetView;
     private PostAdapter.ItemClickListener clickListener;
-    SharedPreferences sharedPreferences;
-    public static final String SHARED_PREFERENCES="shared_prefs";
-    public static final String USERNAME_OR_EMAIL="user_key";
-    String username;
+
+
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -91,8 +89,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
 
         recyclerView=view.findViewById(R.id.post_recycler);
         clickListener=this;
-        sharedPreferences=this.getActivity().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
+
         getInfoUser();
         return view;
     }
@@ -118,17 +115,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     }
     public void getInfoUser(){
 
-        Call<Usuario> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUser("Grangamer2018");
+        Call<Usuario> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUser(mParam1);
 
         UserCall.enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if(response.isSuccessful()){
                     Log.i("c",String.valueOf(response.body()));
-                    Log.i("c",String.valueOf(response.body().getPosts().get(0)));
-                    postAdapter=new PostAdapter(response.body().getPosts(),username,getActivity(),clickListener );
-                    recyclerView.setAdapter(postAdapter);
-                    Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));
+                   /* Log.i("c",String.valueOf(response.body().getPosts().get(0)));*/
+                    if(response.body().getPosts().size()!=0){
+                        postAdapter=new PostAdapter(response.body().getPosts(),mParam1,getActivity(),clickListener );
+                        recyclerView.setAdapter(postAdapter);
+                        Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));
+                    }
+
                 }else{
                     Log.i("c",String.valueOf(response));
                 }

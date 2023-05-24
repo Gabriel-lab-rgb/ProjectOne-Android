@@ -17,6 +17,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -55,8 +56,9 @@ public interface ApiInterface {
     @POST("post/addLike")
     Call<String> addLike(@Field("post_id") long id,@Field("username") String username);
 
+
     @FormUrlEncoded
-    @DELETE("post/deleteLike")
+    @HTTP(method = "DELETE", path = "post/deleteLike", hasBody = true)
     Call<String> deleteLike(@Field("post_id") long id,@Field("username") String username);
 
     //Crear Comentario

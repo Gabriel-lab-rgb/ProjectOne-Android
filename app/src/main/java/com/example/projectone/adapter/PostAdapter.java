@@ -54,7 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         /*Glide.with(context).load(posts.get(position).getUsuario().getImage()).into(holder.image);*/
         holder.username.setText(posts.get(position).getUsuario().getUsername());
         holder.texto.setText(posts.get(position).getTexto());
-        holder.fecha.setText(posts.get(position).getFecha().toString());
+        /*holder.fecha.setText(posts.get(position).getFecha().toString());*/
        /* holder.like.setText(posts.get(position).getCountLikes());
         holder.comentarios.setText(posts.get(position).getComentarios());*/
         holder.comentarios.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -24,6 +26,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
   private BottomNavigationView navigationView;
   private ArrayList<Fragment> fragmentArrayList;
 
+    SharedPreferences sharedPreferences;
+    public static final String SHARED_PREFERENCES="shared_prefs";
+    public static final String USERNAME_OR_EMAIL="user_key";
+    String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
        /* fragmentArrayList.add(new HomeFragment());
         fragmentArrayList.add(new ActivityFragment());
         fragmentArrayList.add(new ProfileFragment());*/
-
+        sharedPreferences=this.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        //username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
+        username="Grangamer2018";
         navigationView=findViewById(R.id.bottomNavigationView);
         navigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
 
@@ -51,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,activity).addToBackStack(null).commit();
                 break;
             case R.id.profile:
-                ProfileFragment profile=new ProfileFragment();
+                ProfileFragment profile=ProfileFragment.newInstance(username);
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
                 break;
             case R.id.add:

@@ -23,6 +23,7 @@ public class ApiClient {
         retrofit =new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
+
                 .build();
         return retrofit;
     }
