@@ -24,6 +24,7 @@ public class Post {
     @SerializedName("texto")
     private String texto;
 
+    @SerializedName("likePosts")
     private ArrayList<LikePost> likePosts;
 
     private ArrayList<Comentario> comentarios;
@@ -33,13 +34,13 @@ public class Post {
         return likePosts;
     }
 
-    public int getCountLikes() {
+   /* public int getCountLikes() {
         return likePosts.size();
     }
 
     public int getComentarios() {
         return comentarios.size();
-    }
+    }*/
 
     public long getId() {
         return id;
@@ -93,5 +94,7 @@ public class Post {
                 '}';
     }
 
-
+    public void setLikePosts(ArrayList<LikePost> likePosts) {
+        this.likePosts = likePosts;
+    }
 }

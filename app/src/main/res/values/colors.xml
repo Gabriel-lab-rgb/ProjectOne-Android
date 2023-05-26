@@ -19,7 +19,8 @@
     <color name="secondary_label_light">#757575</color>
     <color name="secondary_label_dark">#CCCCCC</color>
 
-    <color name="input_background">#f1f1f1</color>
+    <color name="input_background_light">#f1f1f1</color>
+    <color name="input_background_dark">#303030</color>
 
 
     <color name="primary">#4c35e0</color>

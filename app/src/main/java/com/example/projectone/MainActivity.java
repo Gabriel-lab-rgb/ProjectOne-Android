@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.projectone.Fragments.ActivityFragment;
 import com.example.projectone.Fragments.ChatsFragment;
 import com.example.projectone.Fragments.CreatePostFragment;
 import com.example.projectone.Fragments.HomeFragment;

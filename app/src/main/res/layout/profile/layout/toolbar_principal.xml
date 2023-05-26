@@ -11,18 +11,14 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_6sdp">
 
+
         <TextView
-            android:id="@+id/textView_username"
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Grangamer2018"
-
-            android:textSize="@dimen/_22ssp"
+            android:textSize="@dimen/_18ssp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
+            android:text="Principal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </Toolbar>

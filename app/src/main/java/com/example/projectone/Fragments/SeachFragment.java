@@ -2,6 +2,7 @@ package com.example.projectone.Fragments;
 
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
@@ -33,8 +35,8 @@ import retrofit2.Response;
 
 public class SeachFragment extends Fragment implements PostAdapter.ItemClickListener{
 
-private SearchView searchView;
 private EditText search;
+   private ConstraintLayout noResults;
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private PostAdapter.ItemClickListener clickListener;
@@ -46,6 +48,7 @@ private EditText search;
         View view= inflater.inflate(R.layout.fragment_seach, container, false);
         /*searchView=view.findViewById(R.id.searchView);*/
         search = view.findViewById(R.id.search);
+        noResults = view.findViewById(R.id.no_results_text);
         clickListener=this;
         recyclerView=view.findViewById(R.id.user_recycler);
         /*search = searchView.findViewById(androidx.appcompat.R.id.search_src_text);*/
@@ -57,7 +60,11 @@ private EditText search;
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                if (s.length() > 0) {
+                    noResults.setVisibility(View.GONE);
+                } else {
+                    noResults.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override

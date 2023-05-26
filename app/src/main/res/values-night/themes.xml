@@ -16,7 +16,11 @@
 
     <!--MODO OSCURO -->
     <style name="BACKGROUND">
-        <item name="android:background">#212121</item>
+        <item name="android:background">#000000</item>
+    </style>
+
+    <style name="BACKGROUND_ITEM">
+        <item name="android:background">#17181c</item>
     </style>
 
     <style name="PRIMARY_LABEL">
@@ -26,11 +30,15 @@
     <style name="SECONDARY_LABEL">
         <item name="android:textColor">#CCCCCC</item>
     </style>
+
+
     <style name="INPUT_BACKGROUND">
-        <item name="android:textColor">#212121</item>
+        <item name="android:background">@drawable/background_input_dark</item>
     </style>
 
-
+    <style name="ITEM">
+        <item name="android:color">@color/primary_label_dark</item>
+    </style>
 
 
 

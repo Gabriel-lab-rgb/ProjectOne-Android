@@ -74,7 +74,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             constraintLayout=itemView.findViewById(R.id.item_u);
             image=itemView.findViewById(R.id.seach_image);
             username=itemView.findViewById(R.id.seach_username);
-            email=itemView.findViewById(R.id.seach_email);
+            /*email=itemView.findViewById(R.id.seach_email);*/
 
         }
     }

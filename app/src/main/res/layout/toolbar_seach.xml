@@ -3,28 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
-    android:layout_height="@dimen/_48sdp">
+    android:layout_height="@dimen/_40sdp"
+    style="@style/BACKGROUND_ITEM">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/_6sdp">
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
 
-            android:background="@drawable/background_input"
-            android:iconifiedByDefault="false"
-            android:queryHint="Buscar..."
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:hint="Buscar"
+            android:paddingStart="@dimen/_12sdp"
+            style="@style/INPUT_BACKGROUND"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-
-
+             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </Toolbar>

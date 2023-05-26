@@ -61,6 +61,14 @@ public interface ApiInterface {
     @HTTP(method = "DELETE", path = "post/deleteLike", hasBody = true)
     Call<String> deleteLike(@Field("post_id") long id,@Field("username") String username);
 
+ @FormUrlEncoded
+ @POST("user/follow/add")
+ Call<String> addFollow(@Field("follower") String follower,@Field("followed") String followed);
+
+ @FormUrlEncoded
+ @HTTP(method = "DELETE", path = "user/follow/delete", hasBody = true)
+ Call<String> deleteFollow(@Field("follower") String follower,@Field("followed") String followed);
+
     //Crear Comentario
     @FormUrlEncoded
     @POST("comment/create")

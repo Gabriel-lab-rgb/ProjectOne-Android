@@ -32,7 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     private Context context;
     private ItemClickListener clickListener;
 
-    private String username="Grangamer2018";
+    private String username;
 
     public PostAdapter(ArrayList<Post> posts,String username, Context context,ItemClickListener clickListener) {
         this.posts = posts;
@@ -57,6 +57,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         /*holder.fecha.setText(posts.get(position).getFecha().toString());*/
        /* holder.like.setText(posts.get(position).getCountLikes());
         holder.comentarios.setText(posts.get(position).getComentarios());*/
+
+        Log.i("c",posts.get(position).getLikePosts().toString());
         holder.comentarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,13 +73,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 Log.i("c","hola");
 
                 Post post=posts.get(holder.getAdapterPosition());
-                LikePost likePost=new LikePost(new Usuario(username));
+                /*LikePost likePost=new LikePost(new Usuario(username));
                 if(post.getLikePosts().contains(likePost)){
 
                     post.getLikePosts().remove(likePost);
                     deleteLike(post.getId());
                 }else{
                     post.getLikePosts().add(likePost);
+                    addLike(post.getId());
+                }*/
+
+                boolean exists = false;
+                LikePost likePostToRemove = null;
+                for (LikePost likePost : post.getLikePosts()) {
+                    if (likePost.getUsuario() != null && username.equals(likePost.getUsuario().getUsername())) {
+                        exists = true;
+                        likePostToRemove = likePost;
+                        break;
+                    }
+                }
+
+                if (exists) {
+                    // El LikePost con el nombre de usuario específico existe en la lista
+                    post.getLikePosts().remove(likePostToRemove);
+                    deleteLike(post.getId());
+                } else {
+                    // El LikePost con el nombre de usuario específico no existe en la lista
+                    LikePost likePostToAdd = new LikePost(new Usuario(username));
+                    post.getLikePosts().add(likePostToAdd);
                     addLike(post.getId());
                 }
 
@@ -112,8 +135,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             username=itemView.findViewById(R.id.post_username);
             fecha=itemView.findViewById(R.id.post_date);
             texto=itemView.findViewById(R.id.post_text);
-            like=itemView.findViewById(R.id.post_like);
-            comentarios=itemView.findViewById(R.id.post_comentarios);
+           /* like=itemView.findViewById(R.id.post_like);
+            comentarios=itemView.findViewById(R.id.post_comentarios);*/
         }
     }
 
@@ -144,8 +167,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public void deleteLike(long id){
 
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).deleteLike(id,username);
-        create.enqueue(new Callback<String>() {
+        Call<String> delete= ApiClient.getClientString().create(ApiInterface.class).deleteLike(id,"Grangamer2018");
+        delete.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 

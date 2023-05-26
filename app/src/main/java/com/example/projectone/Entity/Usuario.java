@@ -19,12 +19,11 @@ public class Usuario {
     @SerializedName("posts")
     private ArrayList<Post> posts;
 
-    @SerializedName("likePost")
-    private ArrayList<LikePost> likes;
+    @SerializedName("seguidores")
+    private ArrayList<Follow> seguidores;
 
-    public ArrayList<LikePost> getLikes() {
-        return likes;
-    }
+    @SerializedName("siguiendo")
+    private ArrayList<Follow> siguiendo;
 
     public Usuario(String username) {
         this.username = username;
@@ -70,6 +69,22 @@ public class Usuario {
         this.posts = posts;
     }
 
+    public ArrayList<Follow> getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(ArrayList<Follow> seguidores) {
+        this.seguidores = seguidores;
+    }
+
+    public ArrayList<Follow> getSiguiendo() {
+        return siguiendo;
+    }
+
+    public void setSiguiendo(ArrayList<Follow> siguiendo) {
+        this.siguiendo = siguiendo;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -78,6 +93,8 @@ public class Usuario {
                 ", username='" + username + '\'' +
                 ", image='" + image + '\'' +
                 ", posts=" + posts +
+                ", seguidores=" + seguidores +
+                ", siguiendo=" + siguiendo +
                 '}';
     }
 

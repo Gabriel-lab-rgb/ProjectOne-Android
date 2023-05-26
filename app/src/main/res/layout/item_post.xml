@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-
-    >
+    style="@style/BACKGROUND_ITEM">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/_10sdp"
+        android:padding="@dimen/_12sdp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
@@ -31,9 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_6sdp"
             android:text="24 agosto"
-
-            android:textSize="@dimen/_9ssp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageNotification"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
             app:layout_constraintStart_toEndOf="@+id/imageProfile"
             app:layout_constraintTop_toBottomOf="@+id/post_username" />
 
@@ -44,16 +42,16 @@
             android:layout_marginStart="@dimen/_6sdp"
             android:textStyle="bold"
             android:text="Gabriel Rivera Otero"
-            android:textSize="@dimen/_9ssp"
+            android:textSize="@dimen/_12ssp"
 
             app:layout_constraintStart_toEndOf="@+id/imageProfile"
             app:layout_constraintTop_toTopOf="@+id/imageProfile" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageProfile"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@color/secondary"
             android:scaleType="centerCrop"
             app:riv_oval="true"
             app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -71,13 +69,19 @@
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_13ssp"
+            android:padding="@dimen/_12sdp"
             android:text="jhgfjhgkhghjkjhkhjvgvkghv"
-
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:padding="@dimen/_8sdp"
+            android:textSize="@dimen/_14ssp"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_text"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
 
@@ -87,43 +91,49 @@
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/_4sdp"
+        android:padding="@dimen/_12sdp"
         tools:ignore="MissingConstraints"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:columnCount="3"
-            app:rowCount="1">
 
-            <TextView
-                android:id="@+id/post_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="Me gusta"
-                android:textAlignment="center" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_settings_24" />
 
-            <TextView
-                android:id="@+id/post_comentarios"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="comentar"
-                android:textAlignment="center" />
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
-            <TextView
-                android:id="@+id/post_compartir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:text="compartir"
-                android:textAlignment="center" />
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/outline_mode_comment_24" />
 
-        </GridLayout>
-
-
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

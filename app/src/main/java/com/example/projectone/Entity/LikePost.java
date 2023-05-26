@@ -1,16 +1,19 @@
 package com.example.projectone.Entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
 import java.util.Objects;
 
 public class LikePost {
 
+    @SerializedName("id")
     private long id;
-
+    @SerializedName("usuario")
     private Usuario usuario;
-
+    @SerializedName("post")
     private Post post;
-
+    @SerializedName("fecha")
     private Date fecha;
 
     public LikePost(Usuario usuario) {
@@ -50,15 +53,12 @@ public class LikePost {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LikePost likePost = (LikePost) o;
-        return Objects.equals(usuario, likePost.usuario);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(usuario);
+    public String toString() {
+        return "LikePost{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", post=" + post +
+                ", fecha=" + fecha +
+                '}';
     }
 }

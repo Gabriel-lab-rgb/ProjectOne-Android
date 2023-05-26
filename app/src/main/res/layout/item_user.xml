@@ -6,30 +6,20 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_10sdp"
     android:id="@+id/item_u"
+
     app:layout_constraintTop_toTopOf="parent">
 
-
-
-    <TextView
-        android:id="@+id/seach_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:text="#agaariveraotero@gmail.com"
-
-        android:textSize="@dimen/_9ssp"
-        app:layout_constraintStart_toEndOf="@+id/seach_image"
-        app:layout_constraintTop_toBottomOf="@+id/seach_username" />
 
     <TextView
         android:id="@+id/seach_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        android:textStyle="bold"
         android:text="Gabriel Rivera Otero"
-        android:textSize="@dimen/_9ssp"
-
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        style="@style/PRIMARY_LABEL"
+        app:layout_constraintBottom_toBottomOf="@+id/seach_image"
         app:layout_constraintStart_toEndOf="@+id/seach_image"
         app:layout_constraintTop_toTopOf="@+id/seach_image" />
 
