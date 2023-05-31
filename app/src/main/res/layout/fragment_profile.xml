@@ -37,13 +37,11 @@
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_avatar"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:background="@color/material_dynamic_primary10"
                     android:scaleType="centerCrop"
-
                     app:layout_constraintStart_toStartOf="parent"
-
                     app:riv_oval="true"
                     app:shapeAppearanceOverlay="@style/circleImageView" />
 
@@ -54,8 +52,7 @@
                     android:layout_height="wrap_content"
                     android:text="Gabriel Rivera Otero"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:textSize="@dimen/_18ssp"
-                    android:textStyle="bold"
+                    style="@style/PRIMARY_LABEL"
 
                     app:layout_constraintBottom_toBottomOf="@+id/profile_avatar"
 
@@ -63,98 +60,112 @@
                     app:layout_constraintTop_toTopOf="@+id/profile_avatar" />
 
 
-                <TextView
-                    android:id="@+id/user_publicaciones"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout4"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0"
-android:layout_marginTop="@dimen/_20sdp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
+                    android:layout_marginTop="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
+                    app:layout_constraintTop_toBottomOf="@+id/user_description">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Publicaciones · "
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/user_publicaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        app:layout_constraintStart_toEndOf="@+id/textView14"
+                        tools:layout_editor_absoluteY="0dp" />
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Seguidores · "
+
+                        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+                        app:layout_constraintStart_toEndOf="@+id/textView14" />
+
+                    <TextView
+                        android:id="@+id/user_seguidores"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        app:layout_constraintStart_toEndOf="@+id/textView15"
+                        tools:layout_editor_absoluteY="0dp" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:text="Siguiendo · "
+
+                        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+                        app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+                    <TextView
+                        android:id="@+id/user_seguiendo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        app:layout_constraintStart_toEndOf="@+id/textView17" />
 
 
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Publicaciones"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_publicaciones" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:text="Seguidores"
-
-                    app:layout_constraintBottom_toBottomOf="@+id/textView14"
-                    app:layout_constraintStart_toEndOf="@+id/textView14" />
-
-                <TextView
-                    android:id="@+id/user_seguidores"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    app:layout_constraintBottom_toTopOf="@+id/textView15"
-                    app:layout_constraintEnd_toEndOf="@+id/textView15"
-                    app:layout_constraintStart_toStartOf="@+id/textView15" />
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:text="Siguiendo"
-
-                    app:layout_constraintBottom_toBottomOf="@+id/textView15"
-                    app:layout_constraintStart_toEndOf="@+id/textView15" />
-
-                <TextView
-                    android:id="@+id/user_seguiendo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    app:layout_constraintBottom_toTopOf="@+id/textView17"
-                    app:layout_constraintEnd_toEndOf="@+id/textView17"
-                    app:layout_constraintStart_toStartOf="@+id/textView17" />
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/user_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:text="dsdskldjklsdklsjdklsdklsdklsjkldskldnknkndklfndklfndsklnflkddkfndklnfkldnfklfdkfndklfndlkkddklnfdkl"
                     android:textSize="@dimen/_13ssp"
-                    android:layout_marginTop="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
 
 
-                                <Button
-                                    android:id="@+id/btn_seguir"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_12sdp"
-                                    android:text="seguir"
-                                    app:layout_constraintEnd_toStartOf="@id/btn_enviar_mensaje"
-                                    app:layout_constraintHorizontal_bias="0.25"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/user_description" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
-                                <Button
-                                    android:id="@+id/btn_enviar_mensaje"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_12sdp"
-                                    android:text="enviar mensaje"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.75"
-                                    app:layout_constraintStart_toEndOf="@id/btn_enviar_mensaje"
-                                    app:layout_constraintTop_toBottomOf="@+id/user_description" />
+                    <Button
+                        android:id="@+id/btn_seguir"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Seguir"
+                        android:textAllCaps="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/boton2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+                    <Button
+                        android:id="@+id/boton2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Enviar mensaje"
+                        android:textAllCaps="false"
+                        android:drawableRight="@drawable/baseline_send_24"
+                        app:layout_constraintStart_toEndOf="@id/btn_seguir"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -207,8 +218,7 @@ android:layout_marginTop="@dimen/_20sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Publicaciones"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold"
+                style="@style/PRIMARY_LABEL"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginBottom="@dimen/_6sdp"/>
@@ -221,6 +231,8 @@ android:layout_marginTop="@dimen/_20sdp"
                 app:reverseLayout="false">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+
 
         </LinearLayout>
 

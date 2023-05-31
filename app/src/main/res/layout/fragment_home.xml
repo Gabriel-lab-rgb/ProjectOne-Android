@@ -24,16 +24,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/users_recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                 />
+
             <TextView
                 android:id="@+id/textView19"
+                style="@style/PRIMARY_LABEL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:layout_marginBottom="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_12sdp"
+                android:fontFamily="@font/montsemibold"
                 android:text="Publicaciones"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@+id/users_recycleView"
+                 />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -46,9 +54,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sugerencias"
-                android:textSize="@dimen/_14sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:textStyle="bold"
+                android:textSize="@dimen/_12ssp"
+                android:fontFamily="@font/montsemibold"
+                style="@style/PRIMARY_LABEL"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <androidx.recyclerview.widget.RecyclerView

@@ -13,8 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.example.projectone.Entity.Post;
 import com.example.projectone.Entity.Usuario;
@@ -24,6 +23,7 @@ import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.adapter.UserAdapter;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,9 @@ private EditText search;
    private ConstraintLayout noResults;
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
+    private ProgressBar progressBar;
+    private ArrayList<UsuarioSummary> listadoUsuarios;
+
     private PostAdapter.ItemClickListener clickListener;
 
     @Override
@@ -47,6 +50,8 @@ private EditText search;
 
         View view= inflater.inflate(R.layout.fragment_seach, container, false);
         /*searchView=view.findViewById(R.id.searchView);*/
+        progressBar =view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         search = view.findViewById(R.id.search);
         noResults = view.findViewById(R.id.no_results_text);
         clickListener=this;
@@ -60,16 +65,41 @@ private EditText search;
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                progressBar.setVisibility(View.VISIBLE);
+                noResults.setVisibility(View.GONE);
                 if (s.length() > 0) {
-                    noResults.setVisibility(View.GONE);
+                    ApiClient.obtenerUsuarios(s.toString(), new Callback<List<UsuarioSummary>>() {
+                        @Override
+                        public void onResponse(Call<List<UsuarioSummary>> call, Response<List<UsuarioSummary>> response) {
+                            if(response.isSuccessful()){
+                                noResults.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
+                                listadoUsuarios=(ArrayList<UsuarioSummary>) response.body();
+                                if(!listadoUsuarios.isEmpty()){
+                                    userAdapter=new UserAdapter(listadoUsuarios,getActivity(),clickListener);
+                                    recyclerView.setAdapter(userAdapter);
+                                }else{
+                                    vaciaAdapter();
+                                }
+                            }
+
+                        }
+                        @Override
+                        public void onFailure(Call<List<UsuarioSummary>> call, Throwable t) {
+                              Log.i("c",t.getMessage().toString());
+                            Snackbar snackbar = Snackbar.make(view, "Fallo al conectar con el servidor", Snackbar.LENGTH_LONG);
+                            snackbar.setBackgroundTint(getResources().getColor(R.color.error));
+                            snackbar.show();
+                            vaciaAdapter();
+                        }
+                    });
                 } else {
-                    noResults.setVisibility(View.VISIBLE);
+                    vaciaAdapter();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                obtenerUsuarios(s.toString());
             }
 
         });
@@ -90,29 +120,14 @@ private EditText search;
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,profile).addToBackStack(null).commit();
     }
 
-
-    public void obtenerUsuarios(String cadena){
-
-        Call<List<UsuarioSummary>> UserCall= ApiClient.getClientGson().create(ApiInterface.class).getUserStartingWith(cadena);
-
-        UserCall.enqueue(new Callback<List<UsuarioSummary>>() {
-            @Override
-            public void onResponse(Call<List<UsuarioSummary>> call, Response<List<UsuarioSummary>> response) {
-                if(response.isSuccessful()){
-                    Log.i("c 94",response.body().toString());
-                    userAdapter=new UserAdapter((ArrayList<UsuarioSummary>) response.body(),getActivity(),clickListener);
-                    recyclerView.setAdapter(userAdapter);
-
-                }else{
-                    Log.i("c",String.valueOf(response));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<UsuarioSummary>> call, Throwable t) {
-                Log.i("c",t.getMessage());
-            }
-        });
+    private void vaciaAdapter(){
+        if(listadoUsuarios!=null){
+            listadoUsuarios.clear();
+            userAdapter.notifyDataSetChanged();
+        }
+        noResults.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
+
 
     }

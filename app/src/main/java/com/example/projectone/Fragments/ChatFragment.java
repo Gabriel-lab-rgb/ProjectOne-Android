@@ -3,12 +3,23 @@ package com.example.projectone.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 
+import com.example.projectone.Entity.ChatMensaje;
 import com.example.projectone.R;
+import com.example.projectone.adapter.ChatAdapter;
+import com.example.projectone.adapter.UserAdapter;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.net.URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +27,11 @@ import com.example.projectone.R;
  * create an instance of this fragment.
  */
 public class ChatFragment extends Fragment {
+
+    private RecyclerView recyclerView;
+    private ChatAdapter chatAdapter;
+    private EditText editText;
+    private ImageView imageView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +76,33 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view= inflater.inflate(R.layout.fragment_chat, container, false);
+        recyclerView=view.findViewById(R.id.chat_RecyclerView);
+        editText=view.findViewById(R.id.inputMessage);
+        imageView=view.findViewById(R.id.chats_image);
+        WebSocketClient client = new WebSocketClient(URI.create("ws://192.168.0.16:8080/chat")) {
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                // El WebSocket se ha abierto correctamente
+            }
+
+            @Override
+            public void onMessage(String message) {
+
+            }
+
+            @Override
+            public void onClose(int code, String reason, boolean remote) {
+                // El WebSocket se ha cerrado
+            }
+
+            @Override
+            public void onError(Exception ex) {
+                // Se ha producido un error en la conexión WebSocket
+            }
+        };
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        return view;
     }
 }

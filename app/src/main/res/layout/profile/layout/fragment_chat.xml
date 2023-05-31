@@ -21,7 +21,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include3">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/chatRecyclerView"
+            android:id="@+id/chat_RecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/chat_imagen"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_4sdp"

@@ -32,10 +32,10 @@
             android:layout_marginEnd="@dimen/_8sdp"
             android:ellipsize="end"
             android:gravity="center"
-            android:text="Crear Publicación"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold"
-
+            android:text="Nueva publicación"
+            android:textSize="@dimen/_15ssp"
+            android:fontFamily="@font/montbold"
+            style="@style/PRIMARY_LABEL"
             app:layout_constraintBottom_toBottomOf="@+id/imageBack"
             app:layout_constraintStart_toEndOf="@id/imageBack"
             app:layout_constraintTop_toTopOf="@id/imageBack"></TextView>
@@ -44,7 +44,7 @@
             android:id="@+id/button_publicar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_rounded"
+            android:textAllCaps="false"
             android:text="Publicar"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent"

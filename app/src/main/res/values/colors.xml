@@ -13,6 +13,9 @@
     <color name="background_light">#FFFFFF</color> <!-- Color para el modo claro -->
     <color name="background_dark">#212121</color>
 
+    <color name="error">#ff0000</color>
+    <color name="warning">#FFC107</color>
+
     <color name="primary_label_light">#212121</color>
     <color name="primary_label_dark">#FFFFFF</color>
 

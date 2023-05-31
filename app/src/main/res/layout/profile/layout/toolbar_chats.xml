@@ -17,8 +17,9 @@
             android:layout_height="wrap_content"
             android:text="Grangamer2018"
 
-            android:textSize="@dimen/_22ssp"
-            android:textStyle="bold"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/montbold"
+            style="@style/PRIMARY_LABEL"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

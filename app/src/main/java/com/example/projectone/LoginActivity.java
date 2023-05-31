@@ -8,11 +8,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectone.Custom.SharedPreferencesUtils;
+import com.example.projectone.Custom.SnackbarUtils;
 import com.example.projectone.Form.LoginResponse;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
@@ -27,17 +30,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btn_login;
     private EditText editUsername;
     private EditText editPassword;
-
-    public TextView register;
-
-    public static final String SHARED_PREFERENCES="shared_prefs";
-    public static final String USERNAME_OR_EMAIL="user_key";
-    public static final String PASSWORD="password_key";
-
-
-
-    SharedPreferences sharedPreferences;
-    String usernameEmail,password;
+    private TextView register;
+    private static final String USERNAME_OR_EMAIL="user_key";
+    private static final String PASSWORD="password_key";
+    private String usernameEmail,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +44,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editPassword=this.findViewById(R.id.editPassword);
         btn_login=this.findViewById(R.id.button_login);
         register=this.findViewById(R.id.textCreate);
+
+
         btn_login.setOnClickListener(this);
         register.setOnClickListener(this);
-        sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        usernameEmail=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
-        password=sharedPreferences.getString(PASSWORD,null);
+
+        usernameEmail= SharedPreferencesUtils.getString(this, USERNAME_OR_EMAIL, null);
+        password=SharedPreferencesUtils.getString(this, PASSWORD, null);
 
 
     }
@@ -70,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v.getId() == R.id.button_login) {
             if(editUsername.getText().toString().isEmpty() || editPassword.getText().toString().isEmpty()){
-                Toast.makeText(getApplicationContext(),"Los campos no pueden estar vacio",Toast.LENGTH_LONG).show();
+                SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Hay campos vacios", R.color.warning);
             }else{
                 login();
             }
@@ -78,7 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
             finish();
         }
+
     }
+
+
 
     public void login(){
 
@@ -87,34 +88,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
-                Log.i("c","hola");
                 if(response.isSuccessful()){
-                    SharedPreferences.Editor editor= sharedPreferences.edit();
-                    editor.putString(USERNAME_OR_EMAIL,editUsername.getText().toString());
-                    editor.putString(PASSWORD,editPassword.getText().toString());
-                    editor.apply();
+                    SharedPreferencesUtils.setString(getApplicationContext(), USERNAME_OR_EMAIL, editUsername.getText().toString());
+                    SharedPreferencesUtils.setString(getApplicationContext(), PASSWORD, editPassword.getText().toString());
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                     finish();
                 }else{
-                    Log.i("c",String.valueOf(response));
-                    switch (response.code()){
-                        case 403:
-                            Toast.makeText(getApplicationContext(),"Usuario o contraseña incorrecta",Toast.LENGTH_LONG).show();
-                            break;
-                        case 500:
-                            Toast.makeText(getApplicationContext(),"Error 500",Toast.LENGTH_LONG).show();
-                            break;
-                        case 404:
-                            Toast.makeText(getApplicationContext(),"404",Toast.LENGTH_LONG).show();
-                            break;
-                    }
+                    if(response.code()==403)
+                        SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Usuario o contraseña incorrecta", R.color.error);
                 }
 
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Se ha producido un error de conexión", R.color.error);
                 Log.i("c",t.getMessage());
             }
         });

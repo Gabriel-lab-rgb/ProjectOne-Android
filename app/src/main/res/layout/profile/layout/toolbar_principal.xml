@@ -16,8 +16,9 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/montbold"
+            style="@style/PRIMARY_LABEL"
             android:text="Principal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

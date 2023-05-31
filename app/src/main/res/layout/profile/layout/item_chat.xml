@@ -4,25 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/item_u"
-
+    android:id="@+id/item_c"
     app:layout_constraintTop_toTopOf="parent">
 
 
     <TextView
-        android:id="@+id/seach_username"
+        android:id="@+id/chats_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        android:text="Gabriel Rivera Otero"
         android:fontFamily="@font/montsemibold"
         style="@style/PRIMARY_LABEL"
-        app:layout_constraintBottom_toBottomOf="@+id/seach_image"
-        app:layout_constraintStart_toEndOf="@+id/seach_image"
-        app:layout_constraintTop_toTopOf="@+id/seach_image" />
+        app:layout_constraintBottom_toBottomOf="@+id/chats_image"
+        app:layout_constraintStart_toEndOf="@+id/chats_image"
+        app:layout_constraintTop_toTopOf="@+id/chats_image" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/seach_image"
+        android:id="@+id/chats_image"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_width="@dimen/_45sdp"
         android:layout_height="@dimen/_45sdp"

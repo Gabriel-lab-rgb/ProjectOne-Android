@@ -3,6 +3,7 @@ package com.example.projectone;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -64,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 break;
             case R.id.add:
                 CreatePostFragment createPost=new CreatePostFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,createPost).addToBackStack(null).commit();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out);
+                transaction.replace(R.id.frame_layout,createPost).addToBackStack(null).commit();
                 break;
             case R.id.messages:
                 ChatsFragment chatsFragment=new ChatsFragment();

@@ -55,8 +55,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.username.setText(posts.get(position).getUsuario().getUsername());
         holder.texto.setText(posts.get(position).getTexto());
         /*holder.fecha.setText(posts.get(position).getFecha().toString());*/
-       /* holder.like.setText(posts.get(position).getCountLikes());
-        holder.comentarios.setText(posts.get(position).getComentarios());*/
+        /*holder.like.setText(posts.get(position).getLikePosts().size());
+        holder.comentarios.setText("0");*/
 
         Log.i("c",posts.get(position).getLikePosts().toString());
         holder.comentarios.setOnClickListener(new View.OnClickListener() {
@@ -125,9 +125,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView fecha;
         private TextView texto;
 
-        private TextView like;
+        private ImageView like;
 
-        private TextView comentarios;
+        private ImageView comentarios;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -135,8 +135,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             username=itemView.findViewById(R.id.post_username);
             fecha=itemView.findViewById(R.id.post_date);
             texto=itemView.findViewById(R.id.post_text);
-           /* like=itemView.findViewById(R.id.post_like);
-            comentarios=itemView.findViewById(R.id.post_comentarios);*/
+            like=itemView.findViewById(R.id.post_like);
+            comentarios=itemView.findViewById(R.id.post_comentarios);
         }
     }
 

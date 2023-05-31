@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -51,6 +52,10 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
     private String tipo;
     private ImageView image;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
             registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(2), uris -> {
