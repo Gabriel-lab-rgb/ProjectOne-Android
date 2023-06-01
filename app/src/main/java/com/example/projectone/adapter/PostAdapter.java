@@ -36,7 +36,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public PostAdapter(ArrayList<Post> posts,String username, Context context,ItemClickListener clickListener) {
         this.posts = posts;
-        this.username ="Grangamer2018";
+        this.username =username;
         this.context = context;
         this.clickListener=clickListener;
     }
@@ -148,7 +148,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public void addLike(long id){
 
-        Log.i("c",username);
+
         Call<String> create= ApiClient.getClientString().create(ApiInterface.class).addLike(id,username);
         create.enqueue(new Callback<String>() {
             @Override
@@ -156,6 +156,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
                 if(response.isSuccessful()){
                     Log.i("c","like insertado correctamente");
+                }else{
+                    Log.i("c", String.valueOf(response.code()));
                 }
             }
             @Override
@@ -167,13 +169,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public void deleteLike(long id){
 
-        Call<String> delete= ApiClient.getClientString().create(ApiInterface.class).deleteLike(id,"Grangamer2018");
+        Call<String> delete= ApiClient.getClientString().create(ApiInterface.class).deleteLike(id,username);
         delete.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if(response.isSuccessful()){
                     Log.i("c","like eliminado correctamente");
+                }else{
+                    Log.i("c", String.valueOf(response.code()));
                 }
             }
             @Override

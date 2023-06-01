@@ -1,5 +1,7 @@
 package com.example.projectone.Fragments;
 
+import static com.example.projectone.MainActivity.USERNAME_OR_EMAIL;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.projectone.Custom.SharedPreferencesUtils;
 import com.example.projectone.Entity.Follow;
 import com.example.projectone.Entity.LikePost;
 import com.example.projectone.Entity.Post;
@@ -46,13 +49,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
 
     private Usuario usuario;
 
-
-    SharedPreferences sharedPreferences;
-    public static final String SHARED_PREFERENCES="shared_prefs";
-    public static final String USERNAME_OR_EMAIL="user_key";
-    private String username;
-
-
+    private String currentUsername;
     private BottomSheetDialog bottomSheetDialog;
     private Button seguir;
     private View bottomSheetView;
@@ -94,6 +91,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
+
+        currentUsername= SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
         createPost=view.findViewById(R.id.create);
         createPost.setOnClickListener(this);
         seguir=view.findViewById(R.id.btn_seguir);
@@ -105,10 +104,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
         recyclerView=view.findViewById(R.id.post_recycler);
         clickListener=this;
 
-
-        sharedPreferences=getActivity().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        //username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
-        username="Grangamer2018";
 
         getInfoUser(new UserInfoCallback() {
             @Override
@@ -143,7 +138,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
                 boolean exists = false;
                 Follow followToRemove = null;
                 for (Follow follow : usuario.getSeguidores()) {
-                    if (follow.getFollower() != null && username.equals(follow.getFollower().getUsername())) {
+                    if (follow.getFollower() != null && currentUsername.equals(follow.getFollower().getUsername())) {
                         exists = true;
                         followToRemove = follow;
                         break;
@@ -180,7 +175,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
                     Usuario usuario=response.body();
                     /*Log.i("c",user[0].toString());*/
                     if(response.body().getPosts().size()!=0){
-                        postAdapter=new PostAdapter(response.body().getPosts(),mParam1,getActivity(),clickListener );
+                        postAdapter=new PostAdapter(response.body().getPosts(),currentUsername,getActivity(),clickListener );
                         recyclerView.setAdapter(postAdapter);
 
                        /* Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));*/
@@ -203,7 +198,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
 
     public void addSeguidor(){
 
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).addFollow(username,mParam1);
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).addFollow(currentUsername,mParam1);
         create.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -221,7 +216,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
 
     public void deleteSeguidor(){
 
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).deleteFollow(username,mParam1);
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).deleteFollow(currentUsername,mParam1);
         create.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

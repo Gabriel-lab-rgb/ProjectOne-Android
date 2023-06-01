@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.projectone.Custom.SharedPreferencesUtils;
 import com.example.projectone.Fragments.ChatsFragment;
 import com.example.projectone.Fragments.CreatePostFragment;
 import com.example.projectone.Fragments.HomeFragment;
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
   private BottomNavigationView navigationView;
   private ArrayList<Fragment> fragmentArrayList;
 
-    SharedPreferences sharedPreferences;
-    public static final String SHARED_PREFERENCES="shared_prefs";
+
     public static final String USERNAME_OR_EMAIL="user_key";
     String username;
 
@@ -36,12 +36,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* fragmentArrayList.add(new HomeFragment());
-        fragmentArrayList.add(new ActivityFragment());
-        fragmentArrayList.add(new ProfileFragment());*/
-        sharedPreferences=this.getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        //username=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
-        username="Grangamer2018";
+        username= SharedPreferencesUtils.getString(this, USERNAME_OR_EMAIL, null);
         navigationView=findViewById(R.id.bottomNavigationView);
         navigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
 

@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
+
                 if(response.isSuccessful()){
                     SharedPreferencesUtils.setString(getApplicationContext(), USERNAME_OR_EMAIL, editUsername.getText().toString());
                     SharedPreferencesUtils.setString(getApplicationContext(), PASSWORD, editPassword.getText().toString());

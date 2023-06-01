@@ -9,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.FileUtils;
@@ -23,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projectone.Custom.SharedPreferencesUtils;
+import com.example.projectone.Custom.SnackbarUtils;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 import com.google.android.material.resources.TextAppearance;
@@ -47,23 +51,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editPassword;
     private EditText editEmail;
     private ImageView avatar;
+    private File file;
     private Button btn_register;
 
     private TextView login;
-    public static final String SHARED_PREFERENCES="shared_prefs";
+
     public static final String USERNAME_OR_EMAIL="user_key";
     public static final String PASSWORD="password_key";
-    SharedPreferences sharedPreferences;
     String usernameEmail,password;
     Bitmap bitmap;
 
     ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
             registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
-                // Callback is invoked after the user selects a media item or closes the
-                // photo picker.
                 if (uri != null) {
                     Log.d("PhotoPicker", "Selected URI: " + uri);
                     avatar.setImageURI(uri);
+                    file = new File(getRealPathFromURI(this,uri));
 
                     try {
                         bitmap= MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
@@ -89,50 +92,44 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         btn_register=this.findViewById(R.id.btn_register);
         /*login=this.findViewById(R.id.textLogin);*/
 
-        //SharedPreference
-        sharedPreferences=getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
-        usernameEmail=sharedPreferences.getString(USERNAME_OR_EMAIL,null);
-        password=sharedPreferences.getString(PASSWORD,null);
+
+        usernameEmail= SharedPreferencesUtils.getString(this, USERNAME_OR_EMAIL, null);
+        password=SharedPreferencesUtils.getString(this, PASSWORD, null);
 
         //Evento clickListener
         avatar.setOnClickListener(this);
         btn_register.setOnClickListener(this);
-        login.setOnClickListener(this);
+      /*  login.setOnClickListener(this);*/
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private String convertirImgString(Bitmap bitmap){
 
-        ByteArrayOutputStream b=new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,50,b);
-        byte[] imagenBytes=b.toByteArray();
-        String encodedImagen= Base64.getEncoder().encodeToString(imagenBytes);
-
-        return encodedImagen;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void register(){
+        RequestBody email = RequestBody.create(MediaType.parse("text/plain"), editEmail.getText().toString());
+        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), editUsername.getText().toString());
+        RequestBody password = RequestBody.create(MediaType.parse("text/plain"), editPassword.getText().toString());
 
+        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part imagenPart = MultipartBody.Part.createFormData("imagen", file.getName(), requestFile);
 
-
-        Log.i("c",convertirImgString(bitmap)) ;
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).userRegister(editUsername.getText().toString(),editEmail.getText().toString(),editPassword.getText().toString(),convertirImgString(bitmap));
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).userRegister(username,email,password,imagenPart);
         create.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
                 if(response.isSuccessful()){
                     Log.i("c","usuario insertado correctamente");
-                }else{
-                    Log.i("c", String.valueOf(response.code()));
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                    finish();
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.i("c",t.getMessage());
+                SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Se ha producido un error de conexión", R.color.error);
             }
         });
 
@@ -144,9 +141,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == R.id.btn_register) {
             if(editUsername.getText().toString().isEmpty() || editPassword.getText().toString().isEmpty() || editEmail.getText().toString().isEmpty()){
-                Toast.makeText(getApplicationContext(),"Los campos no pueden estar vacio",Toast.LENGTH_LONG).show();
+                SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Hay campos vacios", R.color.warning);
             }else{
-                register();
+                if(file!=null){
+                    register();
+                }else{
+                    SnackbarUtils.showLongSnackbar(findViewById(android.R.id.content), "Debes añadir una imagen de perfil", R.color.error);
+                }
             }
         }else if(v.getId() == R.id.register_avatar){
             pickMedia.launch(new PickVisualMediaRequest.Builder()
@@ -157,5 +158,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         }*/
+    }
+
+
+    public String getRealPathFromURI(Context context, Uri uri) {
+        String filePath = "";
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                filePath = cursor.getString(columnIndex);
+            }
+            cursor.close();
+        }
+        return filePath;
     }
 }

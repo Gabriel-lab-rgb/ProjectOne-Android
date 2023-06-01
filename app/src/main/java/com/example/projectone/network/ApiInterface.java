@@ -10,6 +10,8 @@ import com.example.projectone.Entity.UsuarioSummary;
 import com.example.projectone.Form.LoginResponse;
 import com.google.gson.annotations.SerializedName;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -19,7 +21,9 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -33,10 +37,11 @@ public interface ApiInterface {
     Call<String> userLogin(@Field("usernameOrEmail") String username,@Field("password") String password);
 
    //Registro del usuario
-    @Headers("Content-Type: multipart/form-data;boundary=12345")
-    @FormUrlEncoded
+    @Multipart
+    /*@Headers("Content-Type: multipart/form-data;boundary=12345")*/
+    /*@FormUrlEncoded*/
     @POST("auth/signup")
-    Call<String> userRegister(@Field("username") String username,@Field("email") String email,@Field("password") String password,@Field("file") String file);
+    Call<String> userRegister(@Part("username") RequestBody username, @Part("email") RequestBody email, @Part("password") RequestBody password, @Part MultipartBody.Part imagen);
 
     @GET("/user/search")
     Call<List<UsuarioSummary>> getUserStartingWith(@Query("cadena") String cadena);
@@ -57,9 +62,9 @@ public interface ApiInterface {
     Call<String> addLike(@Field("post_id") long id,@Field("username") String username);
 
 
-    @FormUrlEncoded
-    @HTTP(method = "DELETE", path = "post/deleteLike", hasBody = true)
-    Call<String> deleteLike(@Field("post_id") long id,@Field("username") String username);
+
+    @DELETE("post/deleteLike")
+    Call<String> deleteLike(@Query("post_id") long id,@Query("username") String username);
 
  @FormUrlEncoded
  @POST("user/follow/add")
