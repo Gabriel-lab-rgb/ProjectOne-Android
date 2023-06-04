@@ -1,4 +1,4 @@
-package com.example.projectone.Custom;
+package com.example.projectone.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

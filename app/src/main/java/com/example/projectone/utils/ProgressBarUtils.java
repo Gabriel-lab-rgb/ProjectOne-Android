@@ -1,4 +1,4 @@
-package com.example.projectone.Custom;
+package com.example.projectone.utils;
 
 import android.app.Activity;
 import android.view.View;
@@ -10,9 +10,9 @@ public class ProgressBarUtils {
 
     private ProgressBar progressBar;
 
-    public ProgressBarUtils(Activity activity) {
+    public ProgressBarUtils(View view) {
         // Obtener una referencia al ProgressBar en el layout de la actividad
-        progressBar = activity.findViewById(R.id.progressBar);
+        progressBar = view.findViewById(R.id.progressBar);
     }
 
     public void showProgressBar() {

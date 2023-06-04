@@ -1,4 +1,4 @@
-package com.example.projectone.Fragments;
+package com.example.projectone.fragment;
 
 import android.os.Bundle;
 
@@ -15,14 +15,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.example.projectone.Entity.Post;
-import com.example.projectone.Entity.Usuario;
-import com.example.projectone.Entity.UsuarioSummary;
+import com.example.projectone.entity.Post;
+import com.example.projectone.entity.UsuarioSummary;
 import com.example.projectone.R;
 import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.adapter.UserAdapter;
 import com.example.projectone.network.ApiClient;
-import com.example.projectone.network.ApiInterface;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -49,7 +47,6 @@ private EditText search;
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_seach, container, false);
-        /*searchView=view.findViewById(R.id.searchView);*/
         progressBar =view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
         search = view.findViewById(R.id.search);

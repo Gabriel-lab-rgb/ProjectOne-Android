@@ -1,4 +1,4 @@
-package com.example.projectone.Fragments;
+package com.example.projectone.fragment;
 
 import android.os.Bundle;
 

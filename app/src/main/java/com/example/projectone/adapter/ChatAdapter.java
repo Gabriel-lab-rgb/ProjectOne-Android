@@ -1,6 +1,5 @@
 package com.example.projectone.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectone.Entity.ChatMensaje;
+import com.example.projectone.entity.ChatMensaje;
 import com.example.projectone.R;
 
 import java.util.ArrayList;

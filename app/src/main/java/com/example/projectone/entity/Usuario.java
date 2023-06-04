@@ -1,10 +1,9 @@
-package com.example.projectone.Entity;
+package com.example.projectone.entity;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
 
 public class Usuario {
 

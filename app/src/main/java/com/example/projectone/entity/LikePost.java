@@ -1,22 +1,23 @@
-package com.example.projectone.Entity;
+package com.example.projectone.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import java.sql.Date;
 
-public class Comentario {
+public class LikePost {
 
     @SerializedName("id")
     private long id;
-
     @SerializedName("usuario")
     private Usuario usuario;
-
+    @SerializedName("post")
+    private Post post;
     @SerializedName("fecha")
     private Date fecha;
 
-    @SerializedName("texto")
-    private String texto;
+    public LikePost(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public long getId() {
         return id;
@@ -34,6 +35,14 @@ public class Comentario {
         this.usuario = usuario;
     }
 
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
+
     public Date getFecha() {
         return fecha;
     }
@@ -42,11 +51,13 @@ public class Comentario {
         this.fecha = fecha;
     }
 
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
+    @Override
+    public String toString() {
+        return "LikePost{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", post=" + post +
+                ", fecha=" + fecha +
+                '}';
     }
 }

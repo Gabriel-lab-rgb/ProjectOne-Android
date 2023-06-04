@@ -1,9 +1,12 @@
 package com.example.projectone.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,20 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.projectone.Entity.Comentario;
-import com.example.projectone.Entity.Post;
-import com.example.projectone.Entity.Usuario;
+import com.example.projectone.entity.Comentario;
 import com.example.projectone.R;
-
-import org.w3c.dom.Comment;
+import com.example.projectone.network.ApiClient;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>{
 
     private ArrayList<Comentario> comentarios;
     private Context context;
+
+    private int lastPosition=-1;
 
 
     public CommentAdapter(ArrayList<Comentario> comentarios, Context context) {
@@ -40,17 +41,26 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, int position) {
-
-       /* Glide.with(context).load(comentarios.get(position).getUsuario().getImage()).into(holder.image);*/
+    public void onBindViewHolder(@NonNull CommentAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        String imageUri = ApiClient.API_BASE_URL + "img/" + comentarios.get(position).getUsuario().getImage();
+        if(imageUri!=null){
+            Glide.with(context)
+                    .load(imageUri)
+                    .into(holder.image);
+        }
         holder.username.setText(comentarios.get(position).getUsuario().getUsername());
         holder.texto.setText(comentarios.get(position).getTexto());
+
+
 
     }
 
     @Override
     public int getItemCount() {
         return comentarios.size();
+    }
+    public int getLastPosition() {
+        return getItemCount() - 1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -66,5 +76,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             texto=itemView.findViewById(R.id.comment_text);
 
         }
+    }
+
+    public void addComentario(Comentario comentario) {
+        comentarios.add(comentario);
     }
 }

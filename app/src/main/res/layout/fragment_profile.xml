@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment"
+    tools:context=".fragment.ProfileFragment"
     style="@style/BACKGROUND"
     android:orientation="vertical">
 
@@ -16,9 +16,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include">
-
 
 
         <!-- TODO: Update blank fragment layout -->
@@ -29,16 +29,16 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/BACKGROUND_ITEM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/BACKGROUND_ITEM"
                 android:padding="@dimen/_12sdp">
 
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/profile_avatar"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
                     android:background="@color/material_dynamic_primary10"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
@@ -48,13 +48,11 @@
 
                 <TextView
                     android:id="@+id/profile_username"
+                    style="@style/PRIMARY_LABEL_BOLD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gabriel Rivera Otero"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    style="@style/PRIMARY_LABEL"
-
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_avatar"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:text="GRANGAMER2018"
 
                     app:layout_constraintStart_toEndOf="@+id/profile_avatar"
                     app:layout_constraintTop_toTopOf="@+id/profile_avatar" />
@@ -62,81 +60,93 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout4"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_description">
+                    app:layout_constraintTop_toBottomOf="@+id/profile_avatar">
 
                     <TextView
                         android:id="@+id/textView14"
+                        style="@style/SECONDARY_LABEL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Publicaciones · "
-                        app:layout_constraintStart_toStartOf="parent" />
+                        android:text="Publicaciones"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
-                    <TextView
-                        android:id="@+id/user_publicaciones"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        app:layout_constraintStart_toEndOf="@+id/textView14"
-                        tools:layout_editor_absoluteY="0dp" />
 
                     <TextView
                         android:id="@+id/textView15"
+                        style="@style/SECONDARY_LABEL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_12sdp"
-                        android:text="Seguidores · "
-
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:text="Seguidores"
                         app:layout_constraintBottom_toBottomOf="@+id/textView14"
                         app:layout_constraintStart_toEndOf="@+id/textView14" />
 
                     <TextView
-                        android:id="@+id/user_seguidores"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        app:layout_constraintStart_toEndOf="@+id/textView15"
-                        tools:layout_editor_absoluteY="0dp" />
-
-                    <TextView
                         android:id="@+id/textView17"
+                        style="@style/SECONDARY_LABEL"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_12sdp"
-                        android:text="Siguiendo · "
-
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:text="Siguiendo"
                         app:layout_constraintBottom_toBottomOf="@+id/textView15"
                         app:layout_constraintStart_toEndOf="@+id/textView15" />
 
                     <TextView
-                        android:id="@+id/user_seguiendo"
+                        android:id="@+id/user_number_post"
+                        style="@style/PRIMARY_LABEL_BOLD"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        app:layout_constraintStart_toEndOf="@+id/textView17" />
+                        app:layout_constraintBottom_toTopOf="@+id/textView14"
+                        app:layout_constraintEnd_toEndOf="@+id/textView14"
+                        app:layout_constraintStart_toStartOf="@+id/textView14"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <TextView
+                        android:id="@+id/user_number_seguidores"
+                        style="@style/PRIMARY_LABEL_BOLD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@+id/textView15"
+                        app:layout_constraintEnd_toEndOf="@+id/textView15"
+                        app:layout_constraintStart_toStartOf="@+id/textView15"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/user_number_seguiendo"
+                        style="@style/PRIMARY_LABEL_BOLD"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@+id/textView17"
+                        app:layout_constraintEnd_toEndOf="@+id/textView17"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/user_description"
+                    style="@style/SECONDARY_LABEL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:text="dsdskldjklsdklsjdklsdklsdklsjkldskldnknkndklfndklfndsklnflkddkfndklnfkldnfklfdkfndklfndlkkddklnfdkl"
-                    android:textSize="@dimen/_13ssp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:text="agaariveraotero@gmail.com"
+                    android:textColor="@color/primary"
+                    app:layout_constraintStart_toEndOf="@+id/profile_avatar"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_username" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
@@ -145,24 +155,26 @@
                         android:id="@+id/btn_seguir"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/button_rounded_primary"
                         android:text="Seguir"
                         android:textAllCaps="false"
-                        app:layout_constraintStart_toStartOf="parent"
+
                         app:layout_constraintEnd_toStartOf="@id/boton2"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="spread"/>
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent" />
 
                     <Button
                         android:id="@+id/boton2"
-                        android:layout_width="0dp"
+                        style="@style/BACKGROUND"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Enviar mensaje"
+                        android:layout_marginStart="@dimen/_12sdp"
                         android:textAllCaps="false"
-                        android:drawableRight="@drawable/baseline_send_24"
-                        app:layout_constraintStart_toEndOf="@id/btn_seguir"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="spread"/>
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toEndOf="@id/btn_seguir" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -170,73 +182,21 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-           <!--
-
-            <RadioGroup
-                android:id="@+id/menuOptions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/_6sdp"
-                android:paddingBottom="@dimen/_6sdp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/option1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/_6sdp"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:background="@drawable/radio_selector"
-                    android:button="@drawable/null_radio_button"
-                    android:textColor="@drawable/radio_text_selector"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:text="Publicaciones" />
-
-
-                <RadioButton
-                    android:id="@+id/option2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:padding="@dimen/_6sdp"
-                    android:background="@drawable/radio_selector"
-                    android:button="@drawable/null_radio_button"
-                    android:textColor="@drawable/radio_text_selector"
-                    android:elevation="4dp"
-                    android:gravity="center"
-                    android:text="Historias" />
-
-
-            </RadioGroup>
--->
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Publicaciones"
-                style="@style/PRIMARY_LABEL"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:layout_marginBottom="@dimen/_6sdp"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/post_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:reverseLayout="false">
 
             </androidx.recyclerview.widget.RecyclerView>
 
 
-
         </LinearLayout>
 
+
     </ScrollView>
+
 
 
 

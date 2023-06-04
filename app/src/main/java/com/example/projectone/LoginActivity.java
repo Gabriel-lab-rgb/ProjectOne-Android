@@ -2,21 +2,16 @@ package com.example.projectone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.projectone.Custom.SharedPreferencesUtils;
-import com.example.projectone.Custom.SnackbarUtils;
-import com.example.projectone.Form.LoginResponse;
+import com.example.projectone.utils.SharedPreferencesUtils;
+import com.example.projectone.utils.SnackbarUtils;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 

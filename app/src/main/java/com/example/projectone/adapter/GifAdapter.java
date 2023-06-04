@@ -1,7 +1,6 @@
 package com.example.projectone.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,12 +8,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-import com.example.projectone.Entity.Gif;
+import com.example.projectone.entity.Gif;
 import com.example.projectone.R;
-
-
-import java.util.List;
-
 
 
 public class GifAdapter extends RecyclerView.Adapter<GifAdapter.ViewHolder> {

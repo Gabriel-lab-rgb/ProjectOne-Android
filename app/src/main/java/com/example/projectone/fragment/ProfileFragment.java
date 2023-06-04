@@ -1,10 +1,8 @@
-package com.example.projectone.Fragments;
+package com.example.projectone.fragment;
 
 import static com.example.projectone.MainActivity.USERNAME_OR_EMAIL;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,13 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.projectone.Custom.SharedPreferencesUtils;
-import com.example.projectone.Entity.Follow;
-import com.example.projectone.Entity.LikePost;
-import com.example.projectone.Entity.Post;
-import com.example.projectone.Entity.Usuario;
-import com.example.projectone.Entity.UsuarioSummary;
+import com.example.projectone.utils.SharedPreferencesUtils;
+import com.example.projectone.entity.Follow;
+import com.example.projectone.entity.Post;
+import com.example.projectone.entity.Usuario;
+import com.example.projectone.entity.UsuarioSummary;
 import com.example.projectone.R;
 import com.example.projectone.adapter.PostAdapter;
 import com.example.projectone.network.ApiClient;
@@ -55,7 +53,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     private View bottomSheetView;
     private PostAdapter.ItemClickListener clickListener;
 
-
+private TextView nposts,nseguidores,nseguiendo;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -92,6 +90,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
 
         View view=inflater.inflate(R.layout.fragment_profile, container, false);
 
+
+
         currentUsername= SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
         createPost=view.findViewById(R.id.create);
         createPost.setOnClickListener(this);
@@ -100,15 +100,21 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_bottom_sheet, view.findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottomSheetView);
-
         recyclerView=view.findViewById(R.id.post_recycler);
         clickListener=this;
+
+        nposts=view.findViewById(R.id.user_number_post);
+        nseguidores=view.findViewById(R.id.user_number_seguidores);
+        nseguiendo=view.findViewById(R.id.user_number_seguiendo);
 
 
         getInfoUser(new UserInfoCallback() {
             @Override
             public void onUserInfoReceived(Usuario user) {
                 usuario=user;
+                nposts.setText(String.valueOf(user.getPosts().size()));
+                nseguidores.setText(String.valueOf(user.getSeguidores().size()));
+                nseguiendo.setText(String.valueOf(user.getSiguiendo().size()));
             }
 
             @Override
@@ -235,7 +241,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     @Override
     public void onItemClick(Post post) {
 
-        CommentsFragment home=CommentsFragment.newInstance(post.getId());
+        CommentsFragment home=CommentsFragment.newInstance(post.getId(),currentUsername);
        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,home).addToBackStack(null).commit();
 
     }

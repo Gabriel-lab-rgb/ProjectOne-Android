@@ -1,4 +1,4 @@
-package com.example.projectone.Entity;
+package com.example.projectone.entity;
 
 import java.sql.Date;
 

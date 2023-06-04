@@ -2,31 +2,24 @@ package com.example.projectone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.projectone.Custom.SharedPreferencesUtils;
-import com.example.projectone.Fragments.ChatsFragment;
-import com.example.projectone.Fragments.CreatePostFragment;
-import com.example.projectone.Fragments.HomeFragment;
-import com.example.projectone.Fragments.ProfileFragment;
-import com.example.projectone.Fragments.SeachFragment;
+import com.example.projectone.utils.SharedPreferencesUtils;
+import com.example.projectone.fragment.ChatsFragment;
+import com.example.projectone.fragment.CreatePostFragment;
+import com.example.projectone.fragment.HomeFragment;
+import com.example.projectone.fragment.ProfileFragment;
+import com.example.projectone.fragment.SeachFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
-  private BottomNavigationView navigationView;
-  private ArrayList<Fragment> fragmentArrayList;
-
+    public BottomNavigationView navigationView;
 
     public static final String USERNAME_OR_EMAIL="user_key";
     String username;

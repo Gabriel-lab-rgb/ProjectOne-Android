@@ -15,14 +15,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageBack"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:padding="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_arrow_back_ios_24">
-
-        </androidx.appcompat.widget.AppCompatImageView>
+            app:srcCompat="@drawable/baseline_arrow_back_ios_24"
+            ></androidx.appcompat.widget.AppCompatImageView>
 
         <TextView
             android:id="@+id/textView7"
@@ -33,8 +32,7 @@
             android:ellipsize="end"
             android:gravity="center"
             android:text="Nueva publicación"
-            android:textSize="@dimen/_15ssp"
-            android:fontFamily="@font/montbold"
+            android:fontFamily="@font/montsemibold"
             style="@style/PRIMARY_LABEL"
             app:layout_constraintBottom_toBottomOf="@+id/imageBack"
             app:layout_constraintStart_toEndOf="@id/imageBack"
@@ -43,8 +41,9 @@
         <Button
             android:id="@+id/button_publicar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_25sdp"
             android:textAllCaps="false"
+            android:background="@drawable/button_rounded_primary"
             android:text="Publicar"
             app:layout_constraintBottom_toBottomOf="@+id/textView7"
             app:layout_constraintEnd_toEndOf="parent"

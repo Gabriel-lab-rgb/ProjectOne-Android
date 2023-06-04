@@ -4,11 +4,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.CommentsFragment"
+    tools:context=".fragment.CommentsFragment"
+    style="@style/BACKGROUND_ITEM"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/comment_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Todavia no hay comentarios .Se el primeo en comentar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="@+id/scrollView2"
+        app:layout_constraintTop_toTopOf="@+id/include2"
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/include2"
@@ -17,6 +38,7 @@
         android:layout_height="wrap_content" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
@@ -38,39 +60,26 @@
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
-        style="@style/BACKGROUND_ITEM"
         app:layout_constraintBottom_toBottomOf="parent">
 
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/comment_image_username"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:background="@color/material_dynamic_primary10"
-            app:layout_constraintBottom_toBottomOf="@+id/inputMessage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/inputMessage"
-            app:riv_oval="true"
-            app:shapeAppearanceOverlay="@style/circleImageView" />
-
         <EditText
-            android:id="@+id/inputMessage"
+            android:id="@+id/comment_edit"
+            style="@style/INPUT_BACKGROUND"
             android:layout_width="0dp"
             android:layout_height="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:hint="Añade un comentario..."
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            style="@style/INPUT_BACKGROUND"
             android:inputType="text"
+            android:imeOptions="actionSend"
+            android:importantForAutofill="no"
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/comment_image_username"></EditText>
+            app:layout_constraintStart_toStartOf="parent"></EditText>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

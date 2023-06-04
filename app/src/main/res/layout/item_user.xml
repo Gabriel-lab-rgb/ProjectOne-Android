@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/item_u"
-
+    android:paddingTop="@dimen/_12sdp"
+    android:paddingStart="@dimen/_12sdp"
     app:layout_constraintTop_toTopOf="parent">
 
 
@@ -17,6 +18,7 @@
         android:text="Gabriel Rivera Otero"
         android:fontFamily="@font/montsemibold"
         style="@style/PRIMARY_LABEL"
+
         app:layout_constraintBottom_toBottomOf="@+id/seach_image"
         app:layout_constraintStart_toEndOf="@+id/seach_image"
         app:layout_constraintTop_toTopOf="@+id/seach_image" />

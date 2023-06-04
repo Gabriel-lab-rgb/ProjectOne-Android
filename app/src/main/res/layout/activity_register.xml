@@ -141,7 +141,7 @@
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
 
-            android:background="@drawable/button_rounded" />
+            android:background="@drawable/button_rounded_primary" />
 
 
 

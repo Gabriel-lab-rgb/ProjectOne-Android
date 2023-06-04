@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_12sdp"
     style="@style/BACKGROUND_ITEM">
 
 
@@ -12,7 +11,10 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="@dimen/_12sdp"
+
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
@@ -32,10 +34,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_6sdp"
             android:text="24 agosto"
-
+            android:textSize="@dimen/_8ssp"
             style="@style/SECONDARY_LABEL"
-            app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
-            app:layout_constraintStart_toEndOf="@+id/imageProfile"
+            app:layout_constraintBottom_toBottomOf="@+id/post_avatar"
+            app:layout_constraintStart_toEndOf="@+id/post_avatar"
             app:layout_constraintTop_toBottomOf="@+id/post_username" />
 
         <TextView
@@ -43,13 +45,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_6sdp"
-            android:text="Gabriel Rivera Otero"
+            android:text="GRANGAMER2018"
             style="@style/PRIMARY_LABEL_BOLD"
-            app:layout_constraintStart_toEndOf="@+id/imageProfile"
-            app:layout_constraintTop_toTopOf="@+id/imageProfile" />
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@+id/post_avatar"
+            app:layout_constraintTop_toTopOf="@+id/post_avatar" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageProfile"
+            android:id="@+id/post_avatar"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:background="@color/secondary"
@@ -70,8 +73,12 @@
             android:id="@+id/post_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_12sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingStart="@dimen/_12sdp"
             style="@style/PRIMARY_LABEL"
+            android:textSize="@dimen/_10ssp"
             android:text="jhgfjhgkhghjkjhkhjvgvkghv"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,10 +86,31 @@
             android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:background="@drawable/radius_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_text"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/post_video"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_text">
+
+            <VideoView
+                android:id="@+id/relativeVideo"
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                android:paddingTop="-10dp"
+                android:paddingBottom="-10dp" />
+        </androidx.cardview.widget.CardView>
 
 
 
@@ -99,47 +127,52 @@
 
         <ImageView
             android:id="@+id/post_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/outline_settings_24" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/post_number_likes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+
             android:layout_marginStart="@dimen/_4sdp"
             style="@style/PRIMARY_LABEL"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="@+id/post_like"
             app:layout_constraintStart_toEndOf="@+id/post_like"
             app:layout_constraintTop_toTopOf="@+id/post_like" />
 
         <ImageView
             android:id="@+id/post_comentarios"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintStart_toEndOf="@+id/post_number_likes"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/outline_mode_comment_24" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/post_number_comments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_4sdp"
-            android:text="0"
             style="@style/PRIMARY_LABEL"
+            android:textSize="@dimen/_10ssp"
             app:layout_constraintBottom_toBottomOf="@+id/post_comentarios"
             app:layout_constraintStart_toEndOf="@+id/post_comentarios"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <include
+        layout="@layout/item_separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"></include>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

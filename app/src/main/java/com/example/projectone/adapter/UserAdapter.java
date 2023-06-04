@@ -1,6 +1,8 @@
 package com.example.projectone.adapter;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.projectone.Entity.Post;
-import com.example.projectone.Entity.Usuario;
-import com.example.projectone.Entity.UsuarioSummary;
+import com.bumptech.glide.Glide;
+import com.example.projectone.entity.UsuarioSummary;
 import com.example.projectone.R;
+import com.example.projectone.network.ApiClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
@@ -42,7 +45,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        /*Glide.with(context).load(posts.get(position).getImage()).into(holder.image);*/
+        String imageUri = ApiClient.API_BASE_URL + "img/" + usuarios.get(position).getImage();
+
+if(imageUri!=null){
+    Glide.with(context)
+            .load(imageUri)
+            .into(holder.image);
+
+}
+
         holder.username.setText(usuarios.get(position).getUsername());
         /*holder.email.setText(usuarios.get(position).getEmail());*/
 

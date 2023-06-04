@@ -1,8 +1,11 @@
-package com.example.projectone.Fragments;
+package com.example.projectone.fragment;
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
+
 import android.graphics.Bitmap;
+
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,17 +23,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
+import com.example.projectone.MainActivity;
 import com.example.projectone.R;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
+import com.example.projectone.utils.MediaUtils;
+import com.example.projectone.utils.SharedPreferencesUtils;
+import com.example.projectone.utils.SnackbarUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,37 +54,70 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
     private EditText text;
     private View bottomSheetView;
 
-    public static final String SHARED_PREFERENCES="shared_prefs";
+    private String currentUsuario;
     public static final String USERNAME_OR_EMAIL="user_key";
 
     SharedPreferences sharedPreferences;
 
     private String tipo;
-    private ImageView image;
+    private ImageView imagen;
+    private VideoView video;
+
+    private File file;
+
+    private Uri u;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    ActivityResultLauncher<PickVisualMediaRequest> pickMultipleMedia =
-            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(2), uris -> {
-                // Callback is invoked after the user selects media items or closes the
-                // photo picker.
-                if (!uris.isEmpty()) {
-                    image.setImageURI(uris.get(0));
-                    Log.d("PhotoPicker", "Number of items selected: " + uris.size());
+    ActivityResultLauncher<PickVisualMediaRequest> pickMedia =
+            registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+                if (uri != null) {
+                    Log.d("PhotoPicker", "Selected URI: " + uri);
+                    u=uri;
+                    if(tipo=="Images"){
+                        imagen.setImageURI(uri);
+                        imagen.setVisibility(View.VISIBLE);
+                        video.setVisibility(View.GONE);
+                    }else{
+                        video.setVideoURI(uri);
+                        imagen.setVisibility(View.GONE);
+                        video.setVisibility(View.VISIBLE);
+                    }
+                    file = new File(MediaUtils.getRealPathFromURI(getActivity(), uri));
+
                 } else {
                     Log.d("PhotoPicker", "No media selected");
                 }
             });
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.navigationView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getActivity() instanceof MainActivity) {
+            MainActivity mainActivity = (MainActivity) getActivity();
+            mainActivity.navigationView.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_create_post, container, false);
 
-        sharedPreferences=getContext().getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        currentUsuario= SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
         navigationView=view.findViewById(R.id.bottomNavigationView);
         navigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
@@ -82,14 +125,17 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
         bottomSheetDialog.setContentView(bottomSheetView);
         publicar=view.findViewById(R.id.button_publicar);
         text=view.findViewById(R.id.editText_text);
-        image=view.findViewById(R.id.imageView4);
+        imagen =view.findViewById(R.id.imagePreview);
+        video=view.findViewById(R.id.videoPreview);
+        tipo="Text";
 
         publicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-createPost();
-
+                if(text.getText().toString().isEmpty()){
+                    createPost();
+                }
             }
         });
         return view;
@@ -100,18 +146,13 @@ createPost();
 
         switch (item.getItemId()){
             case R.id.image:
-                pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
                         .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
                         .build());
                 tipo="Images";
                 break;
-           /* case R.id.gif:
-                bottomSheetDialog.show();
-                tipo="Gif";
-            break;*/
-
             case R.id.video:
-                pickMultipleMedia.launch(new PickVisualMediaRequest.Builder()
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
                         .setMediaType(ActivityResultContracts.PickVisualMedia.VideoOnly.INSTANCE)
                         .build());
                 tipo="Video";
@@ -121,31 +162,18 @@ createPost();
         return false;
     }
 
-    private String convertirImgString(Bitmap bitmap){
-
-        return null;
-    }
 
     private void createPost(){
 
-        Map<String,String> params = new HashMap<String, String>();
-        params.put("username", sharedPreferences.getString(USERNAME_OR_EMAIL,null));
-        params.put("comunidad", "");
-        params.put("type",tipo);
-        params.put("texto",text.getText().toString());
-        if(tipo.equals("Gif")){
-            params.put("gif", "");
-        }else if(tipo.equals("Video")){
-            params.put("video", "");
 
-        }else if(tipo.equals("images")){
+        RequestBody username = RequestBody.create(MediaType.parse("text/plain"), currentUsuario);
+        RequestBody contenido = RequestBody.create(MediaType.parse("text/plain"), text.getText().toString());
+        RequestBody type = RequestBody.create(MediaType.parse("text/plain"), tipo);
 
-        }
+        RequestBody requestFile = RequestBody.create(MediaType.parse(MediaUtils.getMediaTypeFromUri(getActivity(),u)), file);
+        MultipartBody.Part mediaPart = MultipartBody.Part.createFormData("media", file.getName(), requestFile);
 
-
-
-
-        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).CreatePost(params);
+        Call<String> create= ApiClient.getClientString().create(ApiInterface.class).CreatePost(username,type,contenido,mediaPart);
         create.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -157,10 +185,14 @@ createPost();
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                SnackbarUtils.showLongSnackbar(getActivity().findViewById(android.R.id.content), "Se ha producido un error de conexión", R.color.error);
                 Log.i("c",t.getMessage());
+
             }
         });
     }
+
+
 
 
 }

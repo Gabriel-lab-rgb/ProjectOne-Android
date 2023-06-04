@@ -1,7 +1,6 @@
-package com.example.projectone.Entity;
+package com.example.projectone.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 public class Sala {
 

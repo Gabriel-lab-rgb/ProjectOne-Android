@@ -25,25 +25,25 @@
 
     <style name="PRIMARY_LABEL">
         <item name="android:fontFamily">@font/montlight</item>
-        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="PRIMARY_LABEL_BOLD">
         <item name="android:fontFamily">@font/montbold</item>
-        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="SECONDARY_LABEL">
         <item name="android:fontFamily">@font/montlight</item>
-        <item name="android:textSize">@dimen/_8sdp</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
         <item name="android:textColor">#CCCCCC</item>
     </style>
 
 
     <style name="INPUT_BACKGROUND">
-        <item name="android:background">@drawable/background_input_dark</item>
+        <item name="android:background">#050505</item>
     </style>
 
     <style name="ITEM">

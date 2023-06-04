@@ -1,4 +1,4 @@
-package com.example.projectone.Custom;
+package com.example.projectone.utils;
 
 
 
@@ -7,11 +7,9 @@ package com.example.projectone.Custom;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
 
-import com.example.projectone.R;
 import com.google.android.material.snackbar.Snackbar;
 
 public class SnackbarUtils {

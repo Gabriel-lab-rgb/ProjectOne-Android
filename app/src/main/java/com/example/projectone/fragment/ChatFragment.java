@@ -1,4 +1,4 @@
-package com.example.projectone.Fragments;
+package com.example.projectone.fragment;
 
 import android.os.Bundle;
 
@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.projectone.Entity.ChatMensaje;
 import com.example.projectone.R;
 import com.example.projectone.adapter.ChatAdapter;
-import com.example.projectone.adapter.UserAdapter;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;

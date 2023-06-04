@@ -3,24 +3,21 @@ package com.example.projectone.network;
 import java.util.List;
 import java.util.Map;
 
-import com.example.projectone.Entity.Comentario;
-import com.example.projectone.Entity.Gif;
-import com.example.projectone.Entity.Usuario;
-import com.example.projectone.Entity.UsuarioSummary;
-import com.example.projectone.Form.LoginResponse;
-import com.google.gson.annotations.SerializedName;
+import com.example.projectone.entity.Comentario;
+import com.example.projectone.entity.Gif;
+import com.example.projectone.entity.Usuario;
+import com.example.projectone.entity.UsuarioSummary;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -52,9 +49,9 @@ public interface ApiInterface {
     Call<Usuario> getUser(@Path("username") String Username);
 
     //Crear publicacion
-    @FormUrlEncoded
+    @Multipart
     @POST("post/create")
-    Call<String> CreatePost(@FieldMap Map<String,String> params);
+    Call<String> CreatePost(@Part("username") RequestBody username,@Part("tipo") RequestBody tipo,@Part("texto") RequestBody contenido,@Part MultipartBody.Part media);
 
 
     @FormUrlEncoded
@@ -77,10 +74,14 @@ public interface ApiInterface {
     //Crear Comentario
     @FormUrlEncoded
     @POST("comment/create")
-    Call<String> CreateComment();
+    Call<Comentario> createComment(@Field("post_id") long id,@Field("username") String username,@Field("comentario") String comentario);
 
     //Mostrar comentarios publicacion
 
     @GET("post/comments/{id}")
     Call<List<Comentario>> getCommentPost(@Path("id") long id);
+
+    @GET("/images/{imageName}")
+    Call<ResponseBody> getImage(@Path("imageName") String imageName);
+
 }

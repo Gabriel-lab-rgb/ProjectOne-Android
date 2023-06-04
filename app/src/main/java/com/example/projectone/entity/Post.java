@@ -1,11 +1,11 @@
-package com.example.projectone.Entity;
+package com.example.projectone.entity;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+
+import retrofit2.http.Multipart;
 
 public class Post {
 
@@ -21,8 +21,14 @@ public class Post {
     @SerializedName("fecha")
     private Date fecha;
 
+    @SerializedName("type")
+    private Tipo tipo;
     @SerializedName("texto")
     private String texto;
+
+    @SerializedName("video")
+    private String video;
+
 
     @SerializedName("likePosts")
     private ArrayList<LikePost> likePosts;
@@ -82,6 +88,22 @@ public class Post {
         this.texto = texto;
     }
 
+
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
 
     @Override
     public String toString() {

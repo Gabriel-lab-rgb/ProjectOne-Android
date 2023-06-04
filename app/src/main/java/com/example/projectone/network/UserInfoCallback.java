@@ -1,6 +1,6 @@
 package com.example.projectone.network;
 
-import com.example.projectone.Entity.Usuario;
+import com.example.projectone.entity.Usuario;
 
 public interface UserInfoCallback {
 
