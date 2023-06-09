@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.ChatsFragment"
-    style="@style/BACKGROUND">
-
+    style="@style/BACKGROUND_ITEM">
 
     <include
         android:id="@+id/include4"
@@ -26,10 +25,8 @@
             android:id="@+id/chats_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_12sdp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:reverseLayout="false">
-
         </androidx.recyclerview.widget.RecyclerView>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

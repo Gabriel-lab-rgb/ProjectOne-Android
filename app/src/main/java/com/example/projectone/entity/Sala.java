@@ -1,15 +1,19 @@
 package com.example.projectone.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.sql.Date;
+import java.util.List;
 
 public class Sala {
 
-
+    @SerializedName("id")
     private long id;
 
-    private Date fecha;
-
-    private Usuario usuario;
+    @SerializedName("fecha")
+    private String fecha;
+    @SerializedName("usuarios")
+    private List<Usuario>usuarios;
 
 
 
@@ -21,19 +25,19 @@ public class Sala {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public List<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }

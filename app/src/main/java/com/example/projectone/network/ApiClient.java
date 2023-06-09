@@ -66,39 +66,5 @@ public class ApiClient {
 
     }
 
-    public static byte[] obtenerImagen(String imageName) throws IOException {
-        final byte[][] imageBytes = {null};
-        CountDownLatch latch = new CountDownLatch(1);
-
-        Call<ResponseBody> call = ApiClient.getClientGson().create(ApiInterface.class).getImage(imageName);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        imageBytes[0] = response.body().bytes();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                latch.countDown(); // Liberar el latch para indicar que se ha completado la llamada
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // Manejar el caso de error de la llamada
-                latch.countDown(); // Liberar el latch incluso en caso de error
-            }
-        });
-
-        try {
-            latch.await(); // Esperar hasta que se complete la llamada
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        return imageBytes[0];
-    }
-
 
 }

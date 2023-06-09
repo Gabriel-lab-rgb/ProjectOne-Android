@@ -1,6 +1,7 @@
 package com.example.projectone.fragment;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,14 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectone.entity.Comentario;
 import com.example.projectone.MainActivity;
 import com.example.projectone.R;
 import com.example.projectone.adapter.CommentAdapter;
+import com.example.projectone.entity.Post;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 import com.example.projectone.utils.ProgressBarUtils;
@@ -48,17 +54,26 @@ public class CommentsFragment extends Fragment {
     private static final String ARG_PARAM2 = "currentUsuario";
 
     // TODO: Rename and change types of parameters
-    private long post;
+    private Post post;
     private String currentUsuario;
     private CommentAdapter commentAdapter;
     private RecyclerView recyclerView;
 
-    private BottomNavigationView bottomNavigationView;
     private EditText comentario;
 
     private TextView comentarioLayout;
 
     private ProgressBarUtils progressBarUtils;
+
+
+
+    /*Variable del post*/
+    private TextView postUsuario;
+    private ImageView postImagenUsuario;
+    private VideoView postVideo;
+    private ImageView postImagen;
+    private TextView postContenido;
+    private TextView nlikes;
 
     public CommentsFragment() {
         // Required empty public constructor
@@ -72,10 +87,10 @@ public class CommentsFragment extends Fragment {
      * @return A new instance of fragment CommentsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CommentsFragment newInstance(long param1,String param2) {
+    public static CommentsFragment newInstance(Post param1, String param2) {
         CommentsFragment fragment = new CommentsFragment();
         Bundle args = new Bundle();
-        args.putLong(ARG_PARAM1, param1);
+        args.putSerializable(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -85,7 +100,7 @@ public class CommentsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            post =getArguments().getLong(ARG_PARAM1);
+            post = (Post) getArguments().getSerializable(ARG_PARAM1);
             currentUsuario =getArguments().getString(ARG_PARAM2);
         }
     }
@@ -120,6 +135,43 @@ public class CommentsFragment extends Fragment {
         comentario=view.findViewById(R.id.comment_edit);
         progressBarUtils = new ProgressBarUtils(view);
 
+        //Variables del post
+        postUsuario=view.findViewById(R.id.post_username);
+        postVideo=view.findViewById(R.id.relativeVideo);
+        postImagenUsuario=view.findViewById(R.id.post_avatar);
+        postImagen=view.findViewById(R.id.imageView8);
+        nlikes=view.findViewById(R.id.post_number_likes);
+
+
+
+        postUsuario.setText(post.getUsuario().getUsername());
+        if(post.getTexto()!=null){
+            postContenido=view.findViewById(R.id.post_text);
+            postContenido.setText(post.getTexto());
+
+        }
+
+        if(post.getTipo().getNombre().equals("Video")){
+            String videoPostUri =ApiClient.API_BASE_URL + "img/" + post.getVideo();
+            postVideo.setVideoURI(Uri.parse(videoPostUri));
+            MediaController mediaController = new MediaController(getContext());
+            mediaController.setAnchorView(postVideo);
+            postVideo.setMediaController(mediaController);
+
+        }else{
+            postVideo.setVisibility(View.GONE);
+
+        }
+
+        nlikes.setText(String.valueOf(post.getLikePosts().size()));
+        String imageUri = ApiClient.API_BASE_URL + "img/" + post.getUsuario().getImage();
+        if(imageUri!=null){
+            Glide.with(getContext())
+                    .load(imageUri)
+                    .into(postImagenUsuario);
+        }
+
+
         comentario.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -136,7 +188,7 @@ public class CommentsFragment extends Fragment {
 
     private void getComentarios(){
 
-        Call<List<Comentario>> comentarioCall= ApiClient.getClientGson().create(ApiInterface.class).getCommentPost(post);
+        Call<List<Comentario>> comentarioCall= ApiClient.getClientGson().create(ApiInterface.class).getCommentPost(post.getId());
         comentarioCall.enqueue(new Callback<List<Comentario>>() {
             @Override
             public void onResponse(Call<List<Comentario>> call, Response<List<Comentario>> response) {
@@ -173,7 +225,7 @@ public class CommentsFragment extends Fragment {
 
     private void crearComentario(String comentario){
         progressBarUtils.showProgressBar();
-        Call<Comentario> comentarioCall= ApiClient.getClientGson().create(ApiInterface.class).createComment(post,currentUsuario,comentario);
+        Call<Comentario> comentarioCall= ApiClient.getClientGson().create(ApiInterface.class).createComment(post.getId(),currentUsuario,comentario);
         comentarioCall.enqueue(new Callback<Comentario>() {
             @Override
             public void onResponse(Call<Comentario> call, Response<Comentario> response) {

@@ -5,7 +5,8 @@
     >
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/white"
+        android:layout_height="2dp"
+        style="@style/BACKGROUND"
+        android:elevation="@dimen/_8sdp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

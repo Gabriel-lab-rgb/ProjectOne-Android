@@ -13,6 +13,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -23,6 +24,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.projectone.MainActivity;
@@ -30,6 +33,7 @@ import com.example.projectone.R;
 import com.example.projectone.network.ApiClient;
 import com.example.projectone.network.ApiInterface;
 import com.example.projectone.utils.MediaUtils;
+import com.example.projectone.utils.ProgressBarUtils;
 import com.example.projectone.utils.SharedPreferencesUtils;
 import com.example.projectone.utils.SnackbarUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,18 +50,19 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CreatePostFragment extends Fragment implements  NavigationView.OnNavigationItemSelectedListener {
-    private BottomNavigationView navigationView;
-    private BottomSheetDialog bottomSheetDialog;
+public class CreatePostFragment extends Fragment implements View.OnClickListener {
 
     private Button publicar;
     private EditText text;
-    private View bottomSheetView;
+
+    private ProgressBarUtils progressBarUtils;
+
+    private CardView card;
 
     private String currentUsuario;
     public static final String USERNAME_OR_EMAIL="user_key";
 
-    SharedPreferences sharedPreferences;
+    private ImageView quitar;
 
     private String tipo;
     private ImageView imagen;
@@ -77,15 +82,21 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
                 if (uri != null) {
                     Log.d("PhotoPicker", "Selected URI: " + uri);
                     u=uri;
-                    if(tipo=="Images"){
+
+                    String mimeType = getContext().getContentResolver().getType(uri);
+
+                    if (mimeType != null && mimeType.startsWith("image/")) {
                         imagen.setImageURI(uri);
                         imagen.setVisibility(View.VISIBLE);
                         video.setVisibility(View.GONE);
-                    }else{
+                        tipo="Images";
+                    } else if (mimeType != null && mimeType.startsWith("video/")) {
                         video.setVideoURI(uri);
                         imagen.setVisibility(View.GONE);
                         video.setVisibility(View.VISIBLE);
+                        tipo="Video";
                     }
+                    quitar.setVisibility(View.VISIBLE);
                     file = new File(MediaUtils.getRealPathFromURI(getActivity(), uri));
 
                 } else {
@@ -115,52 +126,29 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_create_post, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_post, container, false);
 
-        currentUsuario= SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
-        navigationView=view.findViewById(R.id.bottomNavigationView);
-        navigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
-        bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
-        bottomSheetView = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.layout_bottom_sheet_gif, view.findViewById(R.id.bottomSheetContainer));
-        bottomSheetDialog.setContentView(bottomSheetView);
-        publicar=view.findViewById(R.id.button_publicar);
-        text=view.findViewById(R.id.editText_text);
-        imagen =view.findViewById(R.id.imagePreview);
-        video=view.findViewById(R.id.videoPreview);
-        tipo="Text";
 
-        publicar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        currentUsuario = SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
+        publicar = view.findViewById(R.id.button_publicar);
+        card = view.findViewById(R.id.cardMedia);
+        quitar = view.findViewById(R.id.quitar);
+        card.setOnClickListener(this);
+        quitar.setOnClickListener(this);
+        publicar.setOnClickListener(this);
 
-                if(text.getText().toString().isEmpty()){
-                    createPost();
-                }
-            }
-        });
+        progressBarUtils = new ProgressBarUtils(view);
+
+
+        text = view.findViewById(R.id.editText_text);
+        imagen = view.findViewById(R.id.imagePreview);
+        video = view.findViewById(R.id.videoPreview);
+        tipo = "Text";
+
         return view;
+
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.image:
-                pickMedia.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                        .build());
-                tipo="Images";
-                break;
-            case R.id.video:
-                pickMedia.launch(new PickVisualMediaRequest.Builder()
-                        .setMediaType(ActivityResultContracts.PickVisualMedia.VideoOnly.INSTANCE)
-                        .build());
-                tipo="Video";
-                break;
-        }
-
-        return false;
-    }
 
 
     private void createPost(){
@@ -178,6 +166,7 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
 
+                progressBarUtils.showProgressBar();
                 if(response.isSuccessful()){
                     Log.i("c","post insertado correctamente");
                 }
@@ -193,6 +182,30 @@ public class CreatePostFragment extends Fragment implements  NavigationView.OnNa
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.cardMedia:
+                pickMedia.launch(new PickVisualMediaRequest.Builder()
+                        .setMediaType(ActivityResultContracts.PickVisualMedia.ImageAndVideo.INSTANCE)
+                        .build());
+                break;
+            case R.id.quitar:
+                imagen.setImageDrawable(null);
+                video.setVideoURI(null);
+                quitar.setVisibility(View.GONE);
+                tipo="text";
+                u=null;
+                break;
 
+            case R.id.button_publicar:
+                if(!text.getText().toString().isEmpty() && u!=null){
+                    createPost();
+                }else {
+                    Toast.makeText(getContext(), "No has subido nada", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
 
+    }
 }

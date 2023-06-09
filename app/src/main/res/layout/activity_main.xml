@@ -18,7 +18,12 @@
         android:layout_height="wrap_content"
         style="@style/BACKGROUND_ITEM"
         android:layout_alignParentBottom="true"
+        android:elevation="16dp"
         app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        android:outlineProvider="paddedBounds"
+        app:itemTextAppearanceActive="@style/SECONDARY_LABEL_PRIMARY"
+        app:itemTextAppearanceInactive="@style/ICONO_INACTIVO"
         app:itemIconSize="@dimen/_18sdp"
 
         >

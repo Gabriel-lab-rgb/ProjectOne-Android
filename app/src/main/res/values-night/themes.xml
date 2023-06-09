@@ -25,20 +25,25 @@
 
     <style name="PRIMARY_LABEL">
         <item name="android:fontFamily">@font/montlight</item>
-        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="PRIMARY_LABEL_BOLD">
         <item name="android:fontFamily">@font/montbold</item>
-        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
         <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="SECONDARY_LABEL">
         <item name="android:fontFamily">@font/montlight</item>
-        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
         <item name="android:textColor">#CCCCCC</item>
+    </style>
+
+    <style name="INPUT_BACKGROUND_TRASPARENT">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColorHint">@color/secondary_label_dark</item>
     </style>
 
 
@@ -46,10 +51,10 @@
         <item name="android:background">#050505</item>
     </style>
 
-    <style name="ITEM">
-        <item name="android:color">@color/primary_label_dark</item>
-    </style>
 
+    <style name="ICONO_INACTIVO">
+        <item name="android:color">@color/icono_inactivo_dark</item>
+    </style>
 
 
 

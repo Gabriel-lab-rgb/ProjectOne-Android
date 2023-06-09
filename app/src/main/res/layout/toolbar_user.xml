@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_40sdp"
+    android:contentInsetStart="0dp"
+    app:contentInsetStart="0dp"
     style="@style/BACKGROUND_ITEM">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp">
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_12sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageBack"
@@ -23,15 +26,15 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/create"
+            android:id="@+id/crear"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/imageNotification"
+            app:layout_constraintEnd_toStartOf="@+id/ajustes"
             app:srcCompat="@drawable/baseline_add_24" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageNotification"
+            android:id="@+id/ajustes"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:padding="@dimen/_5sdp"

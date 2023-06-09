@@ -47,12 +47,11 @@ private EditText search;
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_seach, container, false);
-        progressBar =view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
         search = view.findViewById(R.id.search);
         noResults = view.findViewById(R.id.no_results_text);
         clickListener=this;
         recyclerView=view.findViewById(R.id.user_recycler);
+        progressBar=view.findViewById(R.id.progressBar);
         /*search = searchView.findViewById(androidx.appcompat.R.id.search_src_text);*/
         search.addTextChangedListener(new TextWatcher() {
             @Override

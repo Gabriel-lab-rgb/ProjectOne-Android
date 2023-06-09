@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Comunidades"
-        android:id="@+id/community"
-        android:icon="@drawable/outline_space_dashboard_24"/>
-    <item android:title="Actividad"
-        android:id="@+id/activity"
-        android:icon="@drawable/outline_feed_24"/>
+    <item android:title="Principal"
+        android:id="@+id/principal"
+        android:icon="@drawable/baseline_home_24"/>
+    <item android:title="Buscar"
+        android:id="@+id/buscar"
+        android:icon="@drawable/outline_search_24"/>
     <item android:title="Add"
         android:id="@+id/add"
         android:icon="@drawable/outline_library_add_24"/>
     <item android:title="Mensajes"
-        android:id="@+id/messages"
+        android:id="@+id/mensajes"
         android:icon="@drawable/outline_chat_bubble_outline_24"/>
     <item android:title="Perfil"
-        android:id="@+id/profile"
+        android:id="@+id/perfil"
         android:icon="@drawable/outline_person_outline_24"/>
 </menu>

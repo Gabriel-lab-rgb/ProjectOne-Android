@@ -25,9 +25,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/seach_image"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@color/resaltado"
         android:scaleType="centerCrop"
         app:riv_oval="true"

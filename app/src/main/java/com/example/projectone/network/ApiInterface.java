@@ -3,8 +3,10 @@ package com.example.projectone.network;
 import java.util.List;
 import java.util.Map;
 
+import com.example.projectone.entity.ChatMensaje;
 import com.example.projectone.entity.Comentario;
 import com.example.projectone.entity.Gif;
+import com.example.projectone.entity.Sala;
 import com.example.projectone.entity.Usuario;
 import com.example.projectone.entity.UsuarioSummary;
 
@@ -81,7 +83,11 @@ public interface ApiInterface {
     @GET("post/comments/{id}")
     Call<List<Comentario>> getCommentPost(@Path("id") long id);
 
-    @GET("/images/{imageName}")
-    Call<ResponseBody> getImage(@Path("imageName") String imageName);
+    @GET("/{username}/salas")
+    Call<List<Sala>> getSalas(@Path("username") String username);
+
+    @GET("/salas/{salaId}/mensajes")
+    Call<List<ChatMensaje>> getMensajes(@Path("salaId") long id);
+
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,29 +18,40 @@
             app:riv_oval="true"
             app:shapeAppearanceOverlay="@style/circleImageView" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/comment_username"
-                android:layout_width="match_parent"
-                android:textSize="@dimen/_9ssp"
-                android:fontFamily="@font/montsemibold"
-                android:layout_height="wrap_content"
-                style="@style/PRIMARY_LABEL"
-                />
+    <TextView
+        android:id="@+id/comment_username"
+        style="@style/PRIMARY_LABEL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montbold"
+        android:text="Grangamer2018"
+        android:textSize="@dimen/_9ssp"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintStart_toEndOf="@+id/comment_image_username"
+        app:layout_constraintTop_toTopOf="@+id/comment_image_username" />
 
-            <TextView
-                android:id="@+id/comment_text"
-                android:layout_width="match_parent"
-                style="@style/PRIMARY_LABEL"
-                android:textSize="@dimen/_11ssp"
-                android:layout_height="wrap_content"
-                 />
+    <TextView
+        android:id="@+id/comment_text"
+        style="@style/PRIMARY_LABEL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:textSize="@dimen/_11ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/comment_image_username"
+        app:layout_constraintTop_toBottomOf="@+id/comment_username" />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/comment_fecha"
+        style="@style/SECONDARY_LABEL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="27/03/2023"
+        android:textSize="@dimen/_9ssp"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintStart_toEndOf="@+id/comment_username"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

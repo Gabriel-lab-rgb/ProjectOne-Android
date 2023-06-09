@@ -59,7 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
         if(posts.get(position).getTipo().getNombre().equals("Video")){
             String videoPostUri =ApiClient.API_BASE_URL + "img/" + posts.get(position).getVideo();
-               holder.video.setVideoURI(Uri.parse(videoPostUri));
+            holder.video.setVideoURI(Uri.parse(videoPostUri));
             MediaController mediaController = new MediaController(context);
             mediaController.setAnchorView(holder.video);
             holder.video.setMediaController(mediaController);

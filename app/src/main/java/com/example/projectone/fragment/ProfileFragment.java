@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.projectone.utils.SharedPreferencesUtils;
 import com.example.projectone.entity.Follow;
 import com.example.projectone.entity.Post;
@@ -43,17 +45,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener,Po
     private ArrayList<Post> posts;
     private RecyclerView recyclerView;
     private PostAdapter postAdapter;
-    private ImageView createPost;
 
     private Usuario usuario;
-
     private String currentUsername;
     private BottomSheetDialog bottomSheetDialog;
     private Button seguir;
     private View bottomSheetView;
     private PostAdapter.ItemClickListener clickListener;
 
-private TextView nposts,nseguidores,nseguiendo;
+    private ConstraintLayout constraintLayout;
+
+
+
+private TextView perfilUsername,perfilEmail,nposts,nseguidores,nseguiendo;
+private ImageView perfilAvatar,perfilAjustes,createPost;
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -93,16 +98,25 @@ private TextView nposts,nseguidores,nseguiendo;
 
 
         currentUsername= SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
-        createPost=view.findViewById(R.id.create);
-        createPost.setOnClickListener(this);
+        createPost=view.findViewById(R.id.crear);
         seguir=view.findViewById(R.id.btn_seguir);
+        constraintLayout=view.findViewById(R.id.panel_botones);
+        createPost.setOnClickListener(this);
         seguir.setOnClickListener(this);
+        clickListener=this;
+        perfilAjustes=view.findViewById(R.id.ajustes);
+
+
+
         bottomSheetDialog = new BottomSheetDialog(view.getContext(), R.style.BottomSheetDialogTheme);
         bottomSheetView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_bottom_sheet, view.findViewById(R.id.bottomSheetContainer));
         bottomSheetDialog.setContentView(bottomSheetView);
-        recyclerView=view.findViewById(R.id.post_recycler);
-        clickListener=this;
 
+
+        recyclerView=view.findViewById(R.id.post_recycler);
+        perfilUsername=view.findViewById(R.id.profile_username);
+        perfilEmail=view.findViewById(R.id.profile_email);
+        perfilAvatar=view.findViewById(R.id.profile_avatar);
         nposts=view.findViewById(R.id.user_number_post);
         nseguidores=view.findViewById(R.id.user_number_seguidores);
         nseguiendo=view.findViewById(R.id.user_number_seguiendo);
@@ -112,6 +126,19 @@ private TextView nposts,nseguidores,nseguiendo;
             @Override
             public void onUserInfoReceived(Usuario user) {
                 usuario=user;
+                perfilUsername.setText(user.getUsername());
+                perfilEmail.setText(user.getEmail());
+
+                String imageUri = ApiClient.API_BASE_URL + "img/" + user.getImage();
+                Glide.with(getContext())
+                        .load(imageUri)
+                        .into(perfilAvatar);
+                if(currentUsername.equals(user.getUsername())){
+                    constraintLayout.setVisibility(View.GONE);
+                    createPost.setVisibility(View.GONE);
+                    perfilAjustes.setVisibility(View.GONE);
+                }
+
                 nposts.setText(String.valueOf(user.getPosts().size()));
                 nseguidores.setText(String.valueOf(user.getSeguidores().size()));
                 nseguiendo.setText(String.valueOf(user.getSiguiendo().size()));
@@ -127,7 +154,7 @@ private TextView nposts,nseguidores,nseguiendo;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.create:
+            case R.id.crear:
                 bottomSheetView.findViewById(R.id.createPost).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -153,12 +180,11 @@ private TextView nposts,nseguidores,nseguiendo;
 
                 if (exists) {
                     usuario.getSiguiendo().remove(followToRemove);
-                  /*  deleteSeguidor();*/
+                    deleteSeguidor();
                 } else {
                     Follow follow = new Follow();
                     usuario.getSiguiendo().add(follow);
-                   /* post.getLikePosts().add(likePostToAdd);*/
-                   /* addSeguidor();*/
+                    addSeguidor();
                 }
 
                break;
@@ -179,12 +205,10 @@ private TextView nposts,nseguidores,nseguiendo;
                     Log.i("c",String.valueOf(response.body()));
 
                     Usuario usuario=response.body();
-                    /*Log.i("c",user[0].toString());*/
+
                     if(response.body().getPosts().size()!=0){
                         postAdapter=new PostAdapter(response.body().getPosts(),currentUsername,getActivity(),clickListener );
                         recyclerView.setAdapter(postAdapter);
-
-                       /* Log.i("c",String.valueOf(response.body().getPosts().get(0).getTexto()));*/
                     }
                     callback.onUserInfoReceived(usuario);
                 }else{
@@ -241,7 +265,7 @@ private TextView nposts,nseguidores,nseguiendo;
     @Override
     public void onItemClick(Post post) {
 
-        CommentsFragment home=CommentsFragment.newInstance(post.getId(),currentUsername);
+        CommentsFragment home=CommentsFragment.newInstance(post,currentUsername);
        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,home).addToBackStack(null).commit();
 
     }

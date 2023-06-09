@@ -2,12 +2,13 @@ package com.example.projectone.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 import retrofit2.http.Multipart;
 
-public class Post {
+public class Post implements Serializable {
 
     @SerializedName("id")
     private long id;
@@ -33,6 +34,7 @@ public class Post {
     @SerializedName("likePosts")
     private ArrayList<LikePost> likePosts;
 
+    @SerializedName("comentarios")
     private ArrayList<Comentario> comentarios;
 
 
@@ -40,13 +42,7 @@ public class Post {
         return likePosts;
     }
 
-   /* public int getCountLikes() {
-        return likePosts.size();
-    }
 
-    public int getComentarios() {
-        return comentarios.size();
-    }*/
 
     public long getId() {
         return id;
@@ -114,6 +110,14 @@ public class Post {
                 ", fecha=" + fecha +
                 ", texto='" + texto + '\'' +
                 '}';
+    }
+
+    public ArrayList<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(ArrayList<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     public void setLikePosts(ArrayList<LikePost> likePosts) {

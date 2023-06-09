@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_40sdp"
+    android:contentInsetStart="0dp"
+    app:contentInsetStart="0dp"
     style="@style/BACKGROUND_ITEM">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp">
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_12sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageBack"
@@ -28,7 +31,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:text="Comentarios"
             android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/montsemibold"
+            android:fontFamily="@font/montbold"
             style="@style/PRIMARY_LABEL"
             app:layout_constraintBottom_toBottomOf="@+id/imageBack"
             app:layout_constraintStart_toEndOf="@+id/imageBack"

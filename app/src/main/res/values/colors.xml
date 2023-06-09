@@ -9,7 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
 
-<color name="resaltado"> #FF4081 </color>
+
+
+
+    <color name="resaltado"> #FF4081 </color>
     <color name="background_light">#FFFFFF</color> <!-- Color para el modo claro -->
     <color name="background_dark">#212121</color>
 
@@ -26,10 +29,10 @@
     <color name="input_background_dark">#303030</color>
 
 
-    <color name="primary">#4c35e0</color>
+    <color name="primary">#2196F3</color>
     <color name="secondary">#64B5F6</color>
-    <color name="icono_activo">#2196F3</color>
-    <color name="icono_inactivo">#9E9E9E</color>
+    <color name="icono_inactivo_dark">#6b6e7d</color>
+    <color name="icono_inactivo_light">#9194a1</color>
     <color name="separador">#BDBDBD</color>
 
 </resources>

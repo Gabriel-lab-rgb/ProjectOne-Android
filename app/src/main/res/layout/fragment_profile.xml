@@ -131,7 +131,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/user_description"
+                    android:id="@+id/profile_email"
                     style="@style/SECONDARY_LABEL"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,6 +144,7 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/panel_botones"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -158,7 +159,6 @@
                         android:background="@drawable/button_rounded_primary"
                         android:text="Seguir"
                         android:textAllCaps="false"
-
                         app:layout_constraintEnd_toStartOf="@id/boton2"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="spread"
@@ -183,6 +183,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_10sdp"
                 android:id="@+id/post_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -3,64 +3,81 @@ package com.example.projectone.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projectone.R;
+import com.example.projectone.adapter.PostAdapter;
+import com.example.projectone.adapter.SalaAdapter;
+import com.example.projectone.adapter.UserAdapter;
+import com.example.projectone.entity.Sala;
+import com.example.projectone.entity.Usuario;
+import com.example.projectone.network.ApiClient;
+import com.example.projectone.network.ApiInterface;
+import com.example.projectone.utils.SharedPreferencesUtils;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ChatsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ChatsFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ChatsFragment() {
-        // Required empty public constructor
-    }
+public class ChatsFragment extends Fragment implements SalaAdapter.SalaClickListener {
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChatsFragment newInstance(String param1, String param2) {
-        ChatsFragment fragment = new ChatsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private String username;
+    private RecyclerView recyclerView;
+    private SalaAdapter salaAdapter;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private SalaAdapter.SalaClickListener salaClickListener;
+    private static final String USERNAME_OR_EMAIL="user_key";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.fragment_chats, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chats, container, false);
+        username=SharedPreferencesUtils.getString(getActivity(), USERNAME_OR_EMAIL, null);
+        recyclerView=view.findViewById(R.id.chats_recycler);
+        obtenerSalas();
+        return view;
+    }
+
+
+    public void obtenerSalas(){
+
+        Call<List<Sala>> f = ApiClient.getClientGson().create(ApiInterface.class).getSalas(username);
+        f.enqueue(new Callback<List<Sala>>() {
+            @Override
+            public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
+                if (response.isSuccessful()) {
+                    List<Sala> salas = response.body();
+                    salaAdapter=new SalaAdapter((ArrayList<Sala>) salas,username,salaClickListener,getActivity());
+                    recyclerView.setAdapter(salaAdapter);
+                    Log.i("c","bien");
+
+                }else{
+                    Log.i("c","error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Sala>> call, Throwable t) {
+                // Maneja el error de la solicitud
+                Log.i("c",t.getMessage());
+            }
+        });
+
+}
+
+    @Override
+    public void onItemClick(Sala sala) {
+        ChatFragment chatFragment=new ChatFragment();
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,chatFragment).addToBackStack(null).commit();
     }
 }

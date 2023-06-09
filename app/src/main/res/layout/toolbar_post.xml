@@ -10,7 +10,8 @@
         android:id="@+id/c1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_6sdp"
+        android:layout_marginLeft="@dimen/_12sdp"
+        android:layout_marginRight="@dimen/_12sdp"
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.AppCompatImageView
